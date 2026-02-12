@@ -62,3 +62,45 @@ def resize_image(img, img_width, img_height):
   '''
   pass 
 
+def crop_image(img, x_start, y_end, img_width, img_height):
+  '''
+  This function will crop the image array into the given dimensions
+  
+  :param img: this is the image array 
+  :param x_start: Description
+  :param y_end: Description
+  :param img_width: Description
+  :param img_height: Description
+  '''
+  pass
+
+def rotate_image(img, angle):
+  '''
+  This funciton rotates the image with a specific angle
+  This is useful for debugging and visualization
+  
+  :param img: is the image array 
+  :param angle: is the angle which the image is tilted
+  '''
+  pass
+
+def flip_image(img, direction):
+  '''
+  This functions will flip the image in the specified direction
+  This is useful for visualization and debugging
+  
+  :param img: is the image array
+  :param direction: is the direction which the image will face
+  '''
+  pass
+
+def batch_process_folder(folder_path, output_path, operation):
+  '''
+  This is important for batch processing, for automation and operation
+  
+  :param folder_path: Description
+  :param output_path: Description
+  :param operation: Description
+  '''
+  
+
