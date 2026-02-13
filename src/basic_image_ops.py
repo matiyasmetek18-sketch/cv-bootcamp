@@ -1,4 +1,6 @@
+import numpy as np
 import cv2 as cv
+
 
 
 def image_info(img):
@@ -13,12 +15,19 @@ def image_info(img):
 
 def load_image(img_path):
   '''
-  This function takes an file path and will display it in the 
-  NumPy array 
+  This function takes an file path and loads an image from disk 
+  It returns a NumPy array 
+  It raises a value error if file does not exist
+  
 
-  Args: img is the image array
+  Args: img_path is the image file on disk 
   '''
-  pass
+  img = cv.imread(img_path)
+  
+  if img is None:
+    raise ValueError('The image is empty')
+  
+  return img
 
 def to_grayscale(img):
   '''
