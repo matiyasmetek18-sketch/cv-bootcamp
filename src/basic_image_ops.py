@@ -62,32 +62,39 @@ def resize_image(img, img_width, img_height):
   '''
   pass 
 
-def crop_image(img, x_start, y_end, img_width, img_height):
+def crop_image(img, x_start, y_start, width, height):
   '''
-  This function will crop the image array into the given dimensions
+  This function extracts a rectangular region of interest (ROI)
+  from the image
+  Cropping is commonly used in preprocessing, object detection pipelines,
+  and isolating specific regions for further analysis
   
   :param img: this is the image array 
-  :param x_start: Description
-  :param y_end: Description
-  :param img_width: Description
-  :param img_height: Description
+  :param x_start: x-coordinate of the top left corner of the crop
+  :param y_end: the y-coordinate of the top-left corner of the top
+  :param width: width of the cropped region
+  :param height: height of the cropped region
   '''
   pass
 
 def rotate_image(img, angle):
   '''
-  This funciton rotates the image with a specific angle
-  This is useful for debugging and visualization
+  This funciton rotates the image by a specific angle
+  
+  Rotation is useful for data augmentation, alignment, and geomertric
+  transformations in computer vision tasks
   
   :param img: is the image array 
-  :param angle: is the angle which the image is tilted
+  :param angle: Rotation angles in degrees (postive = counterclockwise)
   '''
   pass
 
 def flip_image(img, direction):
   '''
-  This functions will flip the image in the specified direction
-  This is useful for visualization and debugging
+  Flips the image horizontally, vertically or both
+  
+  Flipping is usually used for data augmentation and creating
+  oreintation-invariant training samples
   
   :param img: is the image array
   :param direction: is the direction which the image will face
@@ -96,11 +103,15 @@ def flip_image(img, direction):
 
 def batch_process_folder(folder_path, output_path, operation):
   '''
-  This is important for batch processing, for automation and operation
+  Applies a specified image operation to every shape in a folder
+  
+  Batch processing is essential for automation, preprocessing pipelines,
+  and preparing large data sets for machine learning workflows 
   
   :param folder_path: Description
   :param output_path: Description
   :param operation: Description
   '''
+  pass
   
 
