@@ -6,12 +6,38 @@ import cv2 as cv
 def image_info(img):
   '''
   This function takes an image array and return basic information
-  like the min/max pix values, dtype and shape
+  like image shape, min/max pix values, dtype, height and width, 
+  and color format (BGR)
 
   Args: img is the image array 
 
   '''
-  pass
+  
+  if img is not None:
+    
+    
+    # the below will extract heigth, width, channels data from the image
+    height, width, channel = img.shape
+    
+    print(height, width, channel)
+    
+    #below is the data type of the array 
+    print(f'The dtype of the image arary is: {img.dtype}')
+    
+    #min and max pixel values are below
+    min_blue = img[..., 0].min()
+    min_green = img[..., 1].min()
+    min_red = img[..., 2].min()
+    
+    print(f'Minimum pixel values in (B G R) is:  {min_blue}, {min_green}, {min_red}')
+  
+    max_blue = img[..., 0].max()
+    max_green = img[..., 1].max()
+    max_red = img[..., 2].max()
+    
+    print(f'Maximum pixel values in (B G R) is:  {max_blue}, {max_green}, {max_red}')
+  
+  
 
 def load_image(img_path):
   '''
