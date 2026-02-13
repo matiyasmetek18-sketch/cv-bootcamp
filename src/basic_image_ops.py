@@ -19,10 +19,10 @@ def image_info(img):
     # the below will extract heigth, width, channels data from the image
     height, width, channel = img.shape
     
-    print(height, width, channel)
+    print(f'The height, width and channel values respectively are: {img.shape}')
     
     #below is the data type of the array 
-    print(f'The dtype of the image arary is: {img.dtype}')
+    print(f'The dtype of the image array is: {img.dtype}')
     
     #min and max pixel values are below
     min_blue = img[..., 0].min()
@@ -62,7 +62,16 @@ def to_grayscale(img):
   
   Args: img is the image array
   '''
-  pass
+  
+  if img is None:
+    raise ValueError('This is not a valid image')
+  
+  if len(img.size) == 2:
+    raise Exception('This image is already in grayscale')
+  
+  gray_img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+  
+  return gray_img
 
 
 def save_image(img, img_path):
