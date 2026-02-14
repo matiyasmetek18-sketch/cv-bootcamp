@@ -1,6 +1,6 @@
 import numpy as np
 import cv2 as cv
-
+import matplotlib as plt 
 
 
 def image_info(img):
@@ -91,11 +91,14 @@ def save_image(img, img_path):
 
 def display_image(img):
   '''
-  This function will display the image array to a screen 
-  usign Google colab friendly libraries 
+  This function will display the image array to the screen
+  using the matplotlib libaray of python  
 
   Args: img is the image array 
   '''
+  plt.imshow(img)
+  plt.waitforbuttonpress()
+  plt.close('all')
   pass
 
 def resize_image(img, img_width, img_height):
