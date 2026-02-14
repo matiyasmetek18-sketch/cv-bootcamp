@@ -76,15 +76,18 @@ def to_grayscale(img):
 
 def save_image(img, img_path):
   '''
-  This function will save the image array the file path to 
-  where it will be saved  
-  This will help in debugging and reproducing results
+  This function will take a processed image and take it back to the 
+  disk. This is important for dataset preprocessing, exporting augmented images,
+  saving intermediate results, debugging transformations and batch processing
 
 
   Args: img is the image array 
         img_path is the path 
   '''
-  pass 
+  if img is None:
+    raise ValueError('This is not a valid image')
+  
+  return cv.imwrite(img_path, img)
 
 def display_image(img):
   '''
