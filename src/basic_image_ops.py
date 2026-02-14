@@ -96,7 +96,10 @@ def display_image(img):
 
   Args: img is the image array 
   '''
-  plt.imshow(img)
+  
+  RGB_img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+  
+  plt.imshow(RGB_img)
   plt.waitforbuttonpress()
   plt.close('all')
   pass
