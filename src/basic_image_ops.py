@@ -63,8 +63,7 @@ def to_grayscale(img):
   Args: img is the image array
   '''
   
-  if img is None:
-    raise ValueError('This is not a valid image')
+  check_if_valid(img)
   
   if len(img.size) == 2:
     raise Exception('This image is already in grayscale')
@@ -96,12 +95,14 @@ def display_image(img):
 
   Args: img is the image array 
   '''
+  #this functions checks if the image is valid
+  check_if_valid(img)
   
   RGB_img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
   
   plt.imshow(RGB_img)
-  plt.waitforbuttonpress()
-  plt.close('all')
+  plt.axis('off')
+  plt.show()
   pass
 
 def resize_image(img, img_width, img_height):
@@ -167,4 +168,8 @@ def batch_process_folder(folder_path, output_path, operation):
   '''
   pass
   
+  
+def check_if_valid(img):
+  if img is None:
+    raise ValueError('This is not a valid image')
 
