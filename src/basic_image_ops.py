@@ -121,7 +121,7 @@ def resize_image(img, img_width, img_height):
   
   return resized_img 
 
-def crop_image(img, x_start, y_start, width, height):
+def crop_image(img, x_start, y_start, x_end, y_end):
   '''
   This function extracts a rectangular region of interest (ROI)
   from the image
@@ -130,11 +130,22 @@ def crop_image(img, x_start, y_start, width, height):
   
   :param img: this is the image array 
   :param x_start: x-coordinate of the top left corner of the crop
-  :param y_end: the y-coordinate of the top-left corner of the top
-  :param width: width of the cropped region
-  :param height: height of the cropped region
+  :param y_start: the y-coordinate of the top-left corner of the top
+  :param x_end: x-end coordinates of the crop
+  :param y_end: y-end coordinates of the crop
   '''
-  pass
+  
+  check_if_valid(img)
+  img_height, img_width = img.shape[:2]
+  
+  if x_start >= 0 and y_start >= 0:
+    if x_start < x_end and y_start < y_end and x_end <= img_width and y_end <= img_height:
+      cropped_img = img[y_start:y_end, x_start:x_end]
+      return cropped_img
+    else: 
+      raise ValueError('Invalid coordinates')
+  else:
+    raise ValueError('Invalid coordinates')
 
 def rotate_image(img, angle):
   '''
