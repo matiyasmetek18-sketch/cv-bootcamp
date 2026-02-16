@@ -110,11 +110,16 @@ def resize_image(img, img_width, img_height):
   This function will take the image array and resize it to
   the new dimensions
 
-  Args: img is the iamge array 
+  Args: img is the image array 
         img_width is the new image width
         img_height is the new image height
   '''
-  pass 
+  
+  check_if_valid(img)
+  
+  resized_img = cv.resize(img, (img_width, img_height))
+  
+  return resized_img 
 
 def crop_image(img, x_start, y_start, width, height):
   '''
