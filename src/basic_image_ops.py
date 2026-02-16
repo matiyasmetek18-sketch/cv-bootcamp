@@ -157,7 +157,20 @@ def rotate_image(img, angle):
   :param img: is the image array 
   :param angle: Rotation angles in degrees (postive = counterclockwise)
   '''
-  pass
+  check_if_valid(img)
+  
+  img_height, img_width = img.shape[:2]
+  
+  # calculate x,y coordinate of center
+  cX = int(img_width / 2)
+  cY = int(img_height / 2)
+  
+  
+  rotate_matrix = cv.getRotationMatrix2D((cX, cY), angle, 1)
+  
+  rotated_image = cv.warpAffine(img, rotate_matrix, (img_width, img_height))
+  
+  return rotated_image
 
 def flip_image(img, direction):
   '''
@@ -167,9 +180,20 @@ def flip_image(img, direction):
   oreintation-invariant training samples
   
   :param img: is the image array
-  :param direction: is the direction which the image will face
+  :param direction: 0 - vertical flip 
+                    1 - horizontal flip
+                    -1 - both
   '''
-  pass
+  check_if_valid(img)
+  
+  code_range = range(-1, 2)
+  
+  if direction in code_range:
+    flipped_image = cv.flip(img, direction)
+  else:
+    raise ValueError('Invalid direction')
+  
+  return flipped_image
 
 def batch_process_folder(folder_path, output_path, operation):
   '''
