@@ -197,11 +197,11 @@ def flip_image(img, direction):
   
   return flipped_image
 
-def batch_process_folder(folder_path, output_path, operation):
+def batch_process_folder(folder_path, output_path, operation, *args):
   '''
-  Applies a specified image operation to every shape in a folder
+  Applies a specified image operation to every image in a folder
   
-  Batch processing is essential for automation, preprocessing pipelines,
+  Batch proccessing is essential for automation, preprocessing pipelines,
   and preparing large data sets for machine learning workflows 
   
   :param folder_path: is the folder in which are all the images 
@@ -209,7 +209,7 @@ def batch_process_folder(folder_path, output_path, operation):
   :param operation: the operation that will be done on the images
   '''
   img_array = []
-  img_proccessed = 0
+  img_proccessed = []
   if os.path.isdir(folder_path):
     
     if not os.path.exists(output_path):
@@ -220,18 +220,17 @@ def batch_process_folder(folder_path, output_path, operation):
         img_array.append(img)
     
     for img_name in img_array:
-      img_path = os.path.join(img_name, folder_path)
+      img_path = os.path.join(folder_path, img_name)
       img = load_image(img_path)
-      img = operation(*img)
-      output_path = os.path.join(img, output_path)
-      img.save('output.jpg')
-      save_image(img, output_path)
-      img_proccessed += 1
+      img = operation(img, *args)
+      updated_image_path = os.path.join(output_path, img_name)
+      save_image(img, updated_image_path)
+      img_proccessed.append(updated_image_path)
       
   else:
     raise ValueError('Invalid path')
   
-  return {'Image proccessed:': img_proccessed, 'Images:': img_array}
+  return {'Image proccessed': len(img_proccessed), 'Images': img_proccessed}
   
   
 def check_if_valid(img):
