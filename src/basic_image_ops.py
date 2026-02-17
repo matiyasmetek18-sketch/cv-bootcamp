@@ -1,7 +1,9 @@
 import numpy as np
 import cv2 as cv
 import matplotlib as plt 
-
+import os 
+from os import listdir
+from PIL import Image
 
 def image_info(img):
   '''
@@ -202,11 +204,34 @@ def batch_process_folder(folder_path, output_path, operation):
   Batch processing is essential for automation, preprocessing pipelines,
   and preparing large data sets for machine learning workflows 
   
-  :param folder_path: Description
-  :param output_path: Description
-  :param operation: Description
+  :param folder_path: is the folder in which are all the images 
+  :param output_path: is the folder in which proccessed images are saved
+  :param operation: the operation that will be done on the images
   '''
-  pass
+  img_array = []
+  img_proccessed = 0
+  if os.path.isdir(folder_path):
+    
+    if not os.path.exists(output_path):
+      os.makedirs(output_path)
+      
+    for img in os.listdir(folder_path):
+      if(img.endswith('.png') or img.endswith('.jpg') or img.endswith('.jpeg')):
+        img_array.append(img)
+    
+    for img_name in img_array:
+      img_path = os.path.join(img_name, folder_path)
+      img = load_image(img_path)
+      img = operation(*img)
+      output_path = os.path.join(img, output_path)
+      img.save('output.jpg')
+      save_image(img, output_path)
+      img_proccessed += 1
+      
+  else:
+    raise ValueError('Invalid path')
+  
+  return {'Image proccessed:': img_proccessed, 'Images:': img_array}
   
   
 def check_if_valid(img):
