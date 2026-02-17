@@ -243,4 +243,39 @@ def check_if_valid(img):
 
 
 
+def compute_histogram(img):
+  '''
+  This function takes an image array and returns a 256-bin histogram array
+  Color images will be converted to grayscale unless the user passes a grayscale
+  image
+  
+  :param img: color or grayscaled image
+  '''
+  pass
 
+def compute_color_histogram(img):
+  '''
+  This function will output 3 separate histograms in the order R G B
+  
+  :param img: color image
+  '''
+  pass
+
+def plot_histogram(hist):
+  '''
+  This function will plot the histogram and visualized the intensity distribution 
+  
+  :param hist: histogram array 
+  '''
+  pass
+
+def plot_color_histogram(hist_r, hist_g, hist_b):
+  '''
+  This function will plot the combined RGB (red, green, blue) histogram 
+  Each histogram is plotted in its corresponding color
+  
+  :param hist_r: Red historgram to be displayed 
+  :param hist_g: Green historgram to be displayed
+  :param hist_b: Blue histogram to be displayed
+  '''
+  pass
