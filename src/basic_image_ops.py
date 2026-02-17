@@ -196,7 +196,6 @@ def flip_image(img, direction):
     raise ValueError('Invalid direction')
   
   return flipped_image
-
 def batch_process_folder(folder_path, output_path, operation, *args):
   '''
   Applies a specified image operation to every image in a folder
@@ -207,6 +206,7 @@ def batch_process_folder(folder_path, output_path, operation, *args):
   :param folder_path: is the folder in which are all the images 
   :param output_path: is the folder in which proccessed images are saved
   :param operation: the operation that will be done on the images
+  :param *args: extra arguments to make the function reusable for resize_image, flip_image, etc
   '''
   img_array = []
   img_proccessed = []
@@ -220,9 +220,11 @@ def batch_process_folder(folder_path, output_path, operation, *args):
         img_array.append(img)
     
     for img_name in img_array:
+      #joining folder path and file name correctly 
       img_path = os.path.join(folder_path, img_name)
       img = load_image(img_path)
       img = operation(img, *args)
+      # creating a new variable for joining folder path and file name to create a full path
       updated_image_path = os.path.join(output_path, img_name)
       save_image(img, updated_image_path)
       img_proccessed.append(updated_image_path)
@@ -230,10 +232,15 @@ def batch_process_folder(folder_path, output_path, operation, *args):
   else:
     raise ValueError('Invalid path')
   
+  # prints filepaths - img_proccessed
   return {'Image proccessed': len(img_proccessed), 'Images': img_proccessed}
   
   
 def check_if_valid(img):
   if img is None:
     raise ValueError('This is not a valid image')
+
+
+
+
 
