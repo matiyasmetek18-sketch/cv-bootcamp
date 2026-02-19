@@ -237,8 +237,22 @@ def batch_process_folder(folder_path, output_path, operation, *args):
   
   
 def check_if_valid(img):
+  '''
+  This function checks if the image is a valid image
+  
+  :param img: image to be tested 
+  '''
   if img is None:
     raise ValueError('This is not a valid image')
+  
+def check_if_gray(img):
+  '''
+  This function if the image is in grayscale
+  
+  :param img: image array to be tested
+  '''
+  if len(img.size) == 2:
+    raise ValueError('This image is already in grayscale')
 
 
 
@@ -251,6 +265,10 @@ def compute_histogram(img):
   
   :param img: color or grayscaled image
   '''
+  
+  check_if_gray(img)
+  
+  gray_img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
   pass
 
 def compute_color_histogram(img):
