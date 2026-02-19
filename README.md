@@ -40,13 +40,35 @@
   - crop_image
   - rotate_image
   - flip_image
+  - batch_process_folder (first automation pipeline)
 - Learned:
   - Spatial slicing and coordinate validation
   - Image geometry (width, height, center)
   - Rotation matrices and affine transforms
   - Flip codes and orientation handling
+  - How to design a reusable batch-processing function using:
+    - path handling
+    - flexible *args for operations
+    - clean separation of load -> transform -> save
+    - returning structured results
 - Reflection:
   - I learend how to use openCV to re-size an image
   - I learned how to find the center of an image using the width and height of the image.
   - Finding the center was the hardest part for this day
   - I was very much challenged with how to rotate the image. I had to be corrected with co-pilot as it guided me (without it providing me the code) on how to think about in solving it.
+  - Building batch_process_folder was by far the hardest I have done so far. It taught me to think systematically, look for solutions online and use AI (copilot) to guide me in solving the issue. This function combined file iteration, path management, flexible operations, and clean output handling. This was the first time my toolkit felt like an actual tool .
+# Example
+batch_process_folder(
+    folder_path = "input_images"
+    output_path = "output_images"
+    operation = resize_image
+    *args = (200, 150)
+)
+# Example 
+batch_process_folder(
+folder_path = "input_images"
+output_path = "output_images"
+operation = flip_image
+*args = ("image", 45)
+)
+
