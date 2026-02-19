@@ -68,7 +68,7 @@ def to_grayscale(img):
   check_if_valid(img)
   
   if len(img.size) == 2:
-    raise Exception('This image is already in grayscale')
+    raise ValueError('This image is already in grayscale')
   
   gray_img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
   
@@ -272,6 +272,10 @@ def compute_histogram(img):
   
   
   hist_array = [0 for _ in range(256)]
+  
+  # i is a row and j is the pixel intensity - the historgram bin to increment
+  # There is 256 bins, one for each intensity value
+  # The bin is incremented by 1 
   for i in gray_img:
     for j in i:
       hist_array[j] += 1 
@@ -282,11 +286,36 @@ def compute_histogram(img):
 
 def compute_color_histogram(img):
   '''
-  This function will output 3 separate histograms in the order R G B
+  This function will return a dicontonary of 3 separate histograms arrays 
+  in the order B G R
   
   :param img: color image
   '''
-  pass
+  rgb_img = img
+  
+  if is_gray(img):
+    rgb_img = cv.cvtColor(img, cv.COLOR_GRAY2RGB)
+  
+  b, g, r = cv.split(rgb_img)
+  
+  b_hist_array = [0 for _ in range(256)]
+  g_hist_array = [0 for _ in range(256)]
+  r_hist_array = [0 for _ in range(256)]
+  
+  for i in b:
+    for j in i:
+      b_hist_array[j] += 1
+  
+  for i in g:
+    for j in i:
+      g_hist_array[j] += 1
+  
+  for i in r:
+    for j in i:
+      r_hist_array[j] += 1
+      
+  
+  return {'B: ': b_hist_array, 'G: ': g_hist_array, 'R: ': r_hist_array}
 
 def plot_histogram(hist):
   '''
@@ -294,7 +323,18 @@ def plot_histogram(hist):
   
   :param hist: histogram array 
   '''
-  pass
+  if not len(hist) == 256:
+    raise ValueError('This histogram array is invalid')
+  
+  fig, ax = plt.subplots(figsize=(10,4))
+  
+  plt.plot(hist)
+  plt.xlabel('Pixel values')
+  plt.ylabel('Count of pixel values/ Histogram counts')
+  plt.title('Histogram of a Grayscaled Image')
+  
+  plt.show()
+  
 
 def plot_color_histogram(hist_r, hist_g, hist_b):
   '''
