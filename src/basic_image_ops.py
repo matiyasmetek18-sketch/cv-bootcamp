@@ -245,16 +245,13 @@ def check_if_valid(img):
   if img is None:
     raise ValueError('This is not a valid image')
   
-def check_if_gray(img):
+def is_gray(img):
   '''
   This function if the image is in grayscale
   
   :param img: image array to be tested
   '''
-  if len(img.size) == 2:
-    raise ValueError('This image is already in grayscale')
-
-
+  return len(img.size) == 2
 
 
 def compute_histogram(img):
@@ -266,10 +263,22 @@ def compute_histogram(img):
   :param img: color or grayscaled image
   '''
   
-  check_if_gray(img)
+  check_if_valid(img)
   
-  gray_img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-  pass
+  gray_img = img
+  
+  if not is_gray(img):
+    gray_img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+  
+  
+  hist_array = [0 for _ in range(256)]
+  for i in gray_img:
+    for j in i:
+      hist_array[j] += 1 
+    
+  return hist_array
+    
+    
 
 def compute_color_histogram(img):
   '''
