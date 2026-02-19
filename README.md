@@ -57,18 +57,18 @@
   - Finding the center was the hardest part for this day
   - I was very much challenged with how to rotate the image. I had to be corrected with co-pilot as it guided me (without it providing me the code) on how to think about in solving it.
   - Building batch_process_folder was by far the hardest I have done so far. It taught me to think systematically, look for solutions online and use AI (copilot) to guide me in solving the issue. This function combined file iteration, path management, flexible operations, and clean output handling. This was the first time my toolkit felt like an actual tool .
-# Example
+# Example batch resize images to (200, 150)
 batch_process_folder(
     folder_path = "input_images"
     output_path = "output_images"
     operation = resize_image
     *args = (200, 150)
 )
-# Example 
+# Example flip image by a direction of 1 - horizontal flip 
 batch_process_folder(
 folder_path = "input_images"
 output_path = "output_images"
 operation = flip_image
-*args = ("image", 45)
+*args = 1
 )
 
