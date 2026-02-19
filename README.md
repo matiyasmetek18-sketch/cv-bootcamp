@@ -1,4 +1,3 @@
-# cv-bootcamp
 # Computer Vision bootcamp - image operations toolkit
 ## Day 1 - Project setup and functionality scafolding 
 - Created the project structure and initialized the 'basic_image_ops.py' module
