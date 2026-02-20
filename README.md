@@ -33,7 +33,7 @@ Set up the project structure and created scaffolds for all core image‑processi
 
 ---
 
-## ** Milestone 2 — Core Image Operations Implemented**  
+## **Milestone 2 — Core Image Operations Implemented**  
 *Completed over multiple real days*
 
 ### **Overview**  
@@ -62,7 +62,7 @@ Implemented the actual logic for the scaffolds created earlier and validated the
 
 ---
 
-## ** Milestone 3 — Geometric Transformations**  
+## **Milestone 3 — Geometric Transformations**  
 *Completed across several real days*
 
 ### **Overview**  
@@ -122,7 +122,7 @@ batch_process_folder(
 
 ---
 
-## ** Milestone 4 — Histogram Analysis Toolkit**  
+## **Milestone 4 — Histogram Analysis Toolkit**  
 *Completed over several real days*
 
 ### **Overview**  
