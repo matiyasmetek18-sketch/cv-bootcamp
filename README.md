@@ -147,4 +147,34 @@ Implemented a complete histogram analysis module from scratch for both grayscale
 - This phase focused on implementation
 - I felt excited to move into real analsysis   
 - The structure suggested by AI helped me stay organized  
-- This work felt actually felt practical and relevant than school assignments  
+- This work felt actually felt practical and relevant than school assignments
+
+---
+
+##  Milestone 5 — Intesity Transformations
+*Completed over several real days*
+
+###  Overview   
+Implemeneted a full suite of intensity transformations. These functions adjust pixel values directly, enabling brightness control, contrast manipulation, normalization, and contrast stretching for both grayscale and RGB images. All operations were built manually using nested loops, careful min/max scanning, and explicit clipping to maintain valid 0-255 ranges
+
+###  Features Completed 
+- Implemented:
+  - `adjust_brightness`
+  - `adjust_contrast`
+  - `normalize_image`
+  - `contrast_stretch`
+
+###  Learned 
+- How to plot manipulate pixel intensitites at the per-pixel level
+- How to safely compute and use min/max values for scaling
+- How to avoid divide-by-zero error in normalization
+- How to design two-pass algorithms (scan -> transform)
+- How to handle grayscale and RGB images consistently
+- How to build reliable, modular CV utilities that mirror real engineering practice  
+
+###  Reflection 
+- This required the most intense logic so far
+- It was the second most challenging part of the project so far
+- It was easier since I did similar logic prior to this Milestone in Milestone 4
+- I felt myself thinking more like an engineer more than a student
+- The repetition across channels helped me internalize the structure 
