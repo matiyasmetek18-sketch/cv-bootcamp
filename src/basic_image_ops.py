@@ -360,40 +360,45 @@ def plot_color_histogram(hist_r, hist_g, hist_b):
 
 def adjust_brightness(img, value):
   '''
-  This function will adjust the brightness of the image by changing the constant from 
-  every pixel. It will shift pixels up or down
-  This function will work for grayscale and color images
+  Adjusts the brightness of the image by adding a constant value to every pixel 
+  Positive values brighten the image; negative values darken it
+  This function will work for grayscale and color images. Pixel values will be clipped 
+  to 0-255
   
-  :param img: is the color or grayscaled image
-  :param value: the value that will be added or substracted from the pixel image
+  :param img: input image (color or grayscale)
+  :param value: the value that will be added or subtracted from the pixel image
   '''
   pass
 
 def adjust_contrast(img, factor):
   '''
-  This function will adjust the contrast of the image by 'factor' amount
-  This means it will multiply the pixel values by factor 
-  This funciton will work for grayscale and color image
-  This will stretch or compress the intensity range
+  Adjusts the contrast of an image by multiplying all pixel values by a factor
+  Factor > 1 will increases contrast while a factor b/n 0 and 1 will decrease it
+  This function will work for grayscale and color image. Pixel values will be clipped 0-255
   
-  :param img: is the color or grayscaled image
-  :param factor: the factor that the pixel values will be multiplied with
+  :param img: input image (color or grayscale)
+  :param factor: the factor that each pixel value will be multiplied with
   '''
   pass
 
 def normalize_image(img):
   '''
-  This funciton will return the image back to normal.
+  This funciton will perform intensity normalization.
   This means it will scale the pixel values so that the minimum be 0 and the 
   maximum be 255
+  This function will work for grayscale and color images
+  
+  :param img: input image (color or grayscale)
   '''
   pass
 
 def contrast_stretch(img):
   '''
   This function will find the min and max pixel values 
-  This funciton will linearly search intesisites to fill 0-255
-  This funciton will improve the contrast by streaching the histogram
+  This funciton will linearly stretch intesities to fill 0-255
+  This funciton will improve the contrast by streching the histogram
+  
+  :param img: input image (color or grayscale)
   '''
   pass
 
