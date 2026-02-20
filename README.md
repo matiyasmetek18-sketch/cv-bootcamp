@@ -108,6 +108,7 @@ batch_process_folder(
     output_path = "output_images"
     operation = resize_image
     *args = (200, 140)
+```
 
 ###  Example: Flip image horizontally (direction = 1) 
 
