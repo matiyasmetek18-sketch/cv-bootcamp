@@ -1,6 +1,6 @@
 #  Computer Vision Bootcamp — Image Operations Toolkit Organzied by copilot 
 *This project was completed across multiple real days. Each “Milestone” below represents a learning phase, not a single calendar day.*
-*t hello _
+
 ---
 
 ##  Milestone 1 — Project Setup & Functionality Scaffolding   
