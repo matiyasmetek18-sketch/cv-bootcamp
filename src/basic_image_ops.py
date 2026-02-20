@@ -358,7 +358,45 @@ def plot_color_histogram(hist_r, hist_g, hist_b):
   
   plt.show()
 
+def adjust_brightness(img, value):
+  '''
+  This function will adjust the brightness of the image by changing the constant from 
+  every pixel. It will shift pixels up or down
+  This function will work for grayscale and color images
   
+  :param img: is the color or grayscaled image
+  :param value: the value that will be added or substracted from the pixel image
+  '''
+  pass
+
+def adjust_contrast(img, factor):
+  '''
+  This function will adjust the contrast of the image by 'factor' amount
+  This means it will multiply the pixel values by factor 
+  This funciton will work for grayscale and color image
+  This will stretch or compress the intensity range
+  
+  :param img: is the color or grayscaled image
+  :param factor: the factor that the pixel values will be multiplied with
+  '''
+  pass
+
+def normalize_image(img):
+  '''
+  This funciton will return the image back to normal.
+  This means it will scale the pixel values so that the minimum be 0 and the 
+  maximum be 255
+  '''
+  pass
+
+def contrast_stretch(img):
+  '''
+  This function will find the min and max pixel values 
+  This funciton will linearly search intesisites to fill 0-255
+  This funciton will improve the contrast by streaching the histogram
+  '''
+  pass
+
   
   
   
