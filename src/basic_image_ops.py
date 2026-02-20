@@ -5,6 +5,25 @@ import os
 from os import listdir
 from PIL import Image
 
+
+def check_if_valid(img):
+  '''
+  This function checks if the image is a valid image
+  
+  :param img: image to be tested 
+  '''
+  if img is None:
+    raise ValueError('This is not a valid image')
+  
+def is_gray(img):
+  '''
+  This function if the image is in grayscale
+  
+  :param img: image array to be tested
+  '''
+  return len(img.size) == 2
+
+
 def image_info(img):
   '''
   This function takes an image array and return basic information
@@ -234,24 +253,6 @@ def batch_process_folder(folder_path, output_path, operation, *args):
   
   # prints filepaths - img_proccessed
   return {'Image proccessed': len(img_proccessed), 'Images': img_proccessed}
-  
-  
-def check_if_valid(img):
-  '''
-  This function checks if the image is a valid image
-  
-  :param img: image to be tested 
-  '''
-  if img is None:
-    raise ValueError('This is not a valid image')
-  
-def is_gray(img):
-  '''
-  This function if the image is in grayscale
-  
-  :param img: image array to be tested
-  '''
-  return len(img.size) == 2
 
 
 def compute_histogram(img):
@@ -366,20 +367,130 @@ def adjust_brightness(img, value):
   to 0-255
   
   :param img: input image (color or grayscale)
-  :param value: the value that will be added or subtracted from the pixel image
+  :param value: value to be added or subtracted from each pixel
   '''
-  pass
+  
+  check_if_valid(img)
+  
+  adj_img = img.copy()
+  
+  if is_gray(adj_img):
+    row, column = img.shape
+    
+    for i in range(row):
+      
+      for j in range(column):
+        adj_img[i, j] += value
+        
+        if adj_img[i, j] < 0:
+          adj_img[i, j] = 0
+        elif adj_img[i, j] > 255:
+          adj_img[i, j] = 255
+        
+        
+  else: 
+    blue = adj_img[..., 0]
+    green = adj_img[..., 1]
+    red = adj_img[..., 2]
+    
+    row_b, column_b = blue.shape
+    for i in range(row_b):
+      
+      for j in range(column_b):
+        blue[i, j] += value
+        
+        if blue[i, j] < 0:
+          blue[i, j] = 0
+        elif blue[i, j] > 255:
+          blue[i, j] = 255
+    
+    row_g, column_g = green.shape
+    for i in range(row_g):
+      
+      for j in range(column_g):
+        green[i, j] += value
+        
+        if green[i, j] < 0:
+          green[i, j] = 0
+        elif green[i, j] > 255:
+          green[i, j] = 255
+        
+    row_r, column_r = red.shape
+    for i in range(row_r):
+      
+      for j in range(column_r):
+        red[i, j] += value
+        if red[i, j] < 0:
+          red[i, j] = 0
+        elif red[i, j] > 255:
+          red[i, j] = 255
+  
+  
+  return adj_img
 
 def adjust_contrast(img, factor):
   '''
   Adjusts the contrast of an image by multiplying all pixel values by a factor
-  Factor > 1 will increases contrast while a factor b/n 0 and 1 will decrease it
+  Factor > 1 will increase contrast while a factor b/n 0 and 1 will decrease it
   This function will work for grayscale and color image. Pixel values will be clipped 0-255
   
   :param img: input image (color or grayscale)
   :param factor: the factor that each pixel value will be multiplied with
   '''
-  pass
+  adj_img = img.copy()
+  
+  if is_gray(adj_img):
+    row, column = img.shape
+    
+    for i in range(row):
+      
+      for j in range(column):
+        adj_img[i, j] *= factor
+        
+        if adj_img[i, j] < 0:
+          adj_img[i, j] = 0
+        elif adj_img[i, j] > 255:
+          adj_img[i, j] = 255
+  
+  else:
+    blue = adj_img[..., 0]
+    green = adj_img[..., 1]
+    red = adj_img[..., 2]
+    
+    row_b, column_b = blue.shape
+    for i in range(row_b):
+      
+      for j in range(column_b):
+        blue[i, j] *= factor
+        
+        if blue[i, j] < 0:
+          blue[i, j] = 0
+        elif blue[i, j] > 255:
+          blue[i, j] = 255
+    
+    row_g, column_g = green.shape
+    for i in range(row_g):
+      
+      for j in range(column_g):
+        green[i, j] *= factor
+        
+        if green[i, j] < 0:
+          green[i, j] = 0
+        elif green[i, j] > 255:
+          green[i, j] = 255
+        
+    row_r, column_r = red.shape
+    for i in range(row_r):
+      
+      for j in range(column_r):
+        red[i, j] *= factor
+        if red[i, j] < 0:
+          red[i, j] = 0
+        elif red[i, j] > 255:
+          red[i, j] = 255
+  
+  
+  return adj_img
 
 def normalize_image(img):
   '''
@@ -390,7 +501,114 @@ def normalize_image(img):
   
   :param img: input image (color or grayscale)
   '''
-  pass
+  check_if_valid(img)
+  
+  img_copy = img.copy()
+  
+  row, column = img_copy.shape
+  
+  if is_gray(img_copy):
+    max = 0 
+    min = 255
+    
+    for i in range(row):
+      
+      for j in range(column):
+        if max < img_copy[i, j]: 
+          max = img_copy[i, j]
+        if min > img_copy[i, j]: 
+          min = img_copy[i, j]
+    
+    for i in range(row):
+      
+      for j in range(column):
+        img_copy[i, j] -= min
+        if not (max - min == 0):
+          img_copy[i, j] /= (max - min)
+        img_copy[i, j] *= 255
+        
+        if img_copy[i, j] < 0: 
+          img_copy[i, j] = 0
+        elif img_copy[i, j] > 255: 
+          img_copy[i, j] = 255
+  
+  else:
+    blue = img_copy[..., 0]
+    green = img_copy[..., 1]
+    red = img_copy[..., 2]
+    
+    max = 0
+    min = 255
+    
+    row_b, column_b = blue.shape
+    row_g, column_g = green.shape
+    row_r, column_r = red.shape
+    
+    for i in range(row_b):
+      for j in range(column_b):
+        if max < blue[i, j]: 
+          max = blue[i, j]
+        if min > blue[i, j]: 
+          min = blue[i, j]
+        
+    for i in range(row_b):
+      for j in range(column_b):
+        blue[i, j] -= min
+        if not (max - min == 0):
+          blue[i, j] /= (max - min)
+        blue[i, j] *= 255
+        
+        if blue[i, j] < 0: 
+          blue[i, j] = 0
+        elif blue[i, j] > 255: 
+          blue[i, j] = 255
+    
+    max = 0
+    min = 255
+          
+    for i in range(row_g):
+      for j in range(column_g):
+        if max < green[i, j]: 
+          max = green[i, j]
+        if min > green[i, j]: 
+          min = green[i, j]
+        
+    for i in range(row_g):
+      for j in range(column_g):
+        green[i, j] -= min
+        if not (max - min == 0):
+          green[i, j] /= (max - min)
+        green[i, j] *= 255
+        
+        if green[i, j] < 0: 
+          green[i, j] = 0
+        elif green[i, j] > 255: 
+          green[i, j] = 255
+
+    max = 0
+    min = 255
+    
+    for i in range(row_r):
+      for j in range(column_r):
+        if max < red[i, j]: 
+          max = red[i, j]
+        if min > red[i, j]: 
+          min = red[i, j]
+        
+    for i in range(row_r):
+      for j in range(column_r):
+        red[i, j] -= min
+        if not (max - min == 0):
+          red[i, j] /= (max - min)
+        red[i, j] *= 255
+        
+        if red[i, j] < 0: 
+          red[i, j] = 0
+        elif red[i, j] > 255: 
+          red[i, j] = 255
+  
+  return img_copy
+  
 
 def contrast_stretch(img):
   '''
@@ -400,7 +618,113 @@ def contrast_stretch(img):
   
   :param img: input image (color or grayscale)
   '''
-  pass
+  img_copy = img.copy()
+  
+  max = 0
+  min = 255
+  
+  if is_gray(img_copy):
+    row, column = img.shape
+    
+    for i in range(row):
+      for j in range(column):
+        if max < img_copy[i, j]:
+          max = img_copy[i, j]
+        if min > img_copy[i, j]:
+          min = img_copy[i, j]
+    
+    for i in range(row):
+      for j in range(column):
+        img_copy[i, j] -= min
+        if not (max - min == 0):
+          img_copy[i, j] /= (max - min)
+        img_copy[i, j] *= 255
+        
+        if img_copy[i, j] < 0:
+          img_copy[i, j] = 0
+        elif img_copy[i, j] > 255:
+          img_copy[i, j] = 255
+  
+  else:
+    max = 0
+    min = 255
+    
+    blue = img_copy[..., 0]
+    green = img_copy[..., 1]
+    red = img_copy[..., 2]
+    
+    row_b, column_b = blue.shape
+    
+    for i in range(row_b):
+      for j in range(column_b):
+        if max < blue[i, j]:
+          max = blue[i, j]
+        if min > blue[i, j]:
+          min = blue[i, j]
+    
+    for i in range(row_b):
+      for j in range(column_b):
+        blue[i, j] -= min
+        if not (max - min == 0):
+          blue[i, j] /= (max - min)
+        blue[i, j] *= 255
+        
+        if blue[i, j] < 0:
+          blue[i, j] = 0
+        elif blue[i, j] > 255:
+          blue[i, j] = 255
+          
+    
+    max = 0
+    min = 255
+    
+    row_g, column_g = green.shape
+    
+    for i in range(row_g):
+      for j in range(column_g):
+        if max < green[i, j]:
+          max = green[i, j]
+        if min > green[i, j]:
+          min = green[i, j]
+    
+    for i in range(row_g):
+      for j in range(column_g):
+        green[i, j] -= min
+        if not (max - min == 0):
+          green[i, j] /= (max - min)
+        green[i, j] *= 255
+        
+        if green[i, j] < 0:
+          green[i, j] = 0
+        elif green[i, j] > 255:
+          green[i, j] = 255
+    
+    max = 0
+    min = 255
+    
+    row_r, column_r = red.shape
+    
+    for i in range(row_r):
+      for j in range(column_r):
+        if max < red[i, j]:
+          max = red[i, j]
+        if min > red[i, j]:
+          min = red[i, j]
+    
+    for i in range(row_r):
+      for j in range(column_r):
+        red[i, j] -= min
+        if not (max - min == 0):
+          red[i, j] /= (max - min)
+        red[i, j] *= 255
+        
+        if red[i, j] < 0:
+          red[i, j] = 0
+        elif red[i, j] > 255:
+          red[i, j] = 255
+    
+  
+  return img_copy
 
   
   
