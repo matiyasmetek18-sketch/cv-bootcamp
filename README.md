@@ -134,3 +134,16 @@ Implemented a complete histogram analysis module from scratch for both grayscale
   - `compute_color_histogram`
   - `plot_histogram`
   - `plot_color_histogram`
+
+###  Learned 
+- How to plot grayscaled image 
+- How to plot RGB images
+- How to access pixel intensity values
+- How to manually computer historgrams at the pixel level
+- How to design modular reliable CV utilites
+
+###  Reflection 
+- This phase focused on implementation
+- I felt excited to move into real analsysis   
+- The structure suggested by AI helped me stay organized  
+- This work felt actually felt practical and relevant than school assignments  
