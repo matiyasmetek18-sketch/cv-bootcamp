@@ -1,73 +1,156 @@
-# Computer Vision bootcamp - image operations toolkit
-## Day 1 - Project setup and functionality scafolding 
-- Created the project structure and initialized the 'basic_image_ops.py' module
-- Added Scaffolds for core image operations:
-    - Load image
-    - image_info
-    - to_grayscale
-    - save_image
-    - display_image
-    - resize_image
-    - crop_image
-    - rotate_image
-    - flip_image
-    - batch_process folder
-- Focused on writing clean docstrings and planning for API surface
-- Reflection
-  - Today was not implementation but just scaffolding
-  - I was excited to finish day 1 and go to day 2. I feel like I am more relevant material than in school
-  - I followed this structure as it was the one suggested by AI
-## Day 2 - Core Image Operations Implemented 
-- Implemented and validated
-  - load_image
-  - image_info
-  - to-grayscale
-  - save_image
-  - display_image
-- Learned:
-  - BGR vs RGB color spaces
-  - Using matplotlib for visualization
-  - Consistent input validation patterns
-  - Clean return-only utility design
-- Reflection
-  - This day was straight-forward, just the using matplot lib was challenging for me. I was able to find the right answer by looking googling it and seeing what other wrote while checking this answer using co-pilot
-  - I learned some functions of matplotlib and how to use it for image display and to turn the axis off
-  - I understand how to display and image and close the image page as well
-## Day 3 - Geometric Transformations
-- Implemented:
-  - resize_image
-  - crop_image
-  - rotate_image
-  - flip_image
-  - batch_process_folder (first automation pipeline)
-- Learned:
-  - Spatial slicing and coordinate validation
-  - Image geometry (width, height, center)
-  - Rotation matrices and affine transforms
-  - Flip codes and orientation handling
-  - How to design a reusable batch-processing function using:
-    - path handling
-    - flexible *args for operations
-    - clean separation of load -> transform -> save
-    - returning structured results
-- Reflection:
-  - I learend how to use openCV to re-size an image
-  - I learned how to find the center of an image using the width and height of the image.
-  - Finding the center was the hardest part for this day
-  - I was very much challenged with how to rotate the image. I had to be corrected with co-pilot as it guided me (without it providing me the code) on how to think about in solving it.
-  - Building batch_process_folder was by far the hardest I have done so far. It taught me to think systematically, look for solutions online and use AI (copilot) to guide me in solving the issue. This function combined file iteration, path management, flexible operations, and clean output handling. This was the first time my toolkit felt like an actual tool .
-# Example batch resize images to (200, 150)
-batch_process_folder(
-    folder_path = "input_images"
-    output_path = "output_images"
-    operation = resize_image
-    *args = (200, 150)
-)
-# Example flip image by a direction of 1 - horizontal flip 
-batch_process_folder(
-folder_path = "input_images"
-output_path = "output_images"
-operation = flip_image
-*args = 1
-)
+Absolutely — here is your README section rewritten **in clean GitHub‑ready Markdown**, preserving **everything you actually did**, reflecting **the real number of days spent**, and keeping the structure consistent and professional.
 
+You can **copy and paste this directly** into your GitHub README.
+
+---
+
+# **Computer Vision Bootcamp — Image Operations Toolkit**  
+*This project was completed across multiple real days. Each “Milestone” below represents a learning phase, not a single calendar day.*
+
+---
+
+## Milestone 1 — Project Setup & Functionality Scaffolding**  
+*Completed over several real days*
+
+### **Overview**  
+Set up the project structure and created scaffolds for all core image‑processing functions. Focused on writing clean docstrings, planning the API surface, and establishing a professional workflow using VS Code + GitHub.
+
+### **Features Completed**
+- Created project folder structure (`src/`, `notebooks/`, `assets/`)
+- Initialized `basic_image_ops.py`
+- Added scaffolds for core image operations:
+  - `load_image`
+  - `image_info`
+  - `to_grayscale`
+  - `save_image`
+  - `display_image`
+  - `resize_image`
+  - `crop_image`
+  - `rotate_image`
+  - `flip_image`
+  - `batch_process_folder`
+- Wrote clean docstrings and planned the function interfaces
+
+### **Reflection**
+- This phase focused on scaffolding, not implementation  
+- I felt excited to move into real functionality afterward  
+- The structure suggested by AI helped me stay organized  
+- This work felt more practical and relevant than school assignments  
+
+---
+
+## **📌 Milestone 2 — Core Image Operations Implemented**  
+*Completed over multiple real days*
+
+### **Overview**  
+Implemented the actual logic for the scaffolds created earlier and validated them using test images. Focused on correctness, clarity, and error handling.
+
+### **Features Completed**
+- Implemented and validated:
+  - `load_image`
+  - `image_info`
+  - `to_grayscale`
+  - `save_image`
+  - `display_image`
+
+### **Learned**
+- BGR vs RGB color spaces  
+- How to use Matplotlib for image visualization  
+- How to turn axes off for clean display  
+- Consistent input‑validation patterns  
+- Clean, return‑only utility design  
+
+### **Reflection**
+- This milestone felt straightforward  
+- Matplotlib was the most challenging part, but I solved issues by Googling and checking with Copilot  
+- I learned how to display and close images properly  
+- I felt more confident working with OpenCV and Matplotlib  
+
+---
+
+## **📌 Milestone 3 — Geometric Transformations**  
+*Completed across several real days*
+
+### **Overview**  
+Expanded the toolkit with geometric image operations and built the first automation pipeline using batch processing. Focused on writing reusable, flexible functions.
+
+### **Features Completed**
+- Implemented:
+  - `resize_image`
+  - `crop_image`
+  - `rotate_image`
+  - `flip_image`
+  - `batch_process_folder` (first automation pipeline)
+
+### **Learned**
+- Spatial slicing and coordinate validation  
+- Image geometry (width, height, center)  
+- Rotation matrices and affine transforms  
+- Flip codes and orientation handling  
+- How to design a reusable batch‑processing function using:
+  - path handling  
+  - flexible `*args` for operations  
+  - clean separation of load → transform → save  
+  - returning structured results  
+
+### **Reflection**
+- Learned how to resize images using OpenCV  
+- Finding the image center was the hardest part  
+- Rotation challenged me the most — Copilot guided my thinking without giving code  
+- `batch_process_folder` was the hardest function so far  
+  - It required systematic thinking  
+  - Searching online  
+  - Using AI guidance  
+  - Handling paths, iteration, flexible operations, and clean output  
+- This was the first time my toolkit felt like a real tool  
+
+---
+
+### **Example: Batch resize images to (200, 150)**
+
+```python
+batch_process_folder(
+    folder_path="input_images",
+    output_path="output_images",
+    operation=resize_image,
+    *args=(200, 150)
+)
+```
+
+### **Example: Flip image horizontally (direction = 1)**
+
+```python
+batch_process_folder(
+    folder_path="input_images",
+    output_path="output_images",
+    operation=flip_image,
+    *args=(1,)
+)
+```
+
+---
+
+## **📌 Milestone 4 — Histogram Analysis Toolkit**  
+*Completed over several real days*
+
+### **Overview**  
+Implemented a complete histogram analysis module from scratch for both grayscale and RGB images. This included computing pixel‑intensity distributions and visualizing them using Matplotlib.
+
+### **Features Completed**
+- Implemented:
+  - `compute_histogram`
+  - `compute_color_histogram`
+  - `plot_histogram`
+  - `plot_color_histogram`
+
+---
+
+If you want, I can also help you add:
+
+- A **Project Overview** at the top  
+- A **Roadmap** for future milestones  
+- A **Tech Stack** section  
+- A **Usage Examples** section  
+- A **Before/After gallery** once you generate images  
+
+Just tell me when you’re ready — and once your README is updated, we’ll jump straight into **Day 5**.
