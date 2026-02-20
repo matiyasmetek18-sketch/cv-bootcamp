@@ -345,4 +345,20 @@ def plot_color_histogram(hist_r, hist_g, hist_b):
   :param hist_g: Green historgram to be displayed
   :param hist_b: Blue histogram to be displayed
   '''
-  pass
+  
+  if not (len(hist_r) == 256 and len(hist_g) == 256 and len(hist_b) == 256):
+    raise ValueError('Invalid color imgage')
+  
+  plt.plot(hist_r, color = 'red', label = 'Red histogram')
+  plt.plot(hist_g, color = 'green', label = 'Green histogram')
+  plt.plot(hist_b, color = 'blue', label = 'Blue histogram')
+  plt.xlabel('Pixel values')
+  plt.ylabel('Count of red, green, and blue pixel values/ Histogram counts')
+  plt.title('Color Histogram')
+  
+  plt.show()
+
+  
+  
+  
+  
