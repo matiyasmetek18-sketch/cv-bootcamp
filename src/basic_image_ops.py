@@ -727,5 +727,7 @@ def contrast_stretch(img):
   return img_copy
 
   
-  
-  
+def histogram_equalization(img):
+  if is_gray(img):
+    compute_histogram(img)
+    

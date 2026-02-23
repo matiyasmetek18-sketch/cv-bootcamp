@@ -41,10 +41,10 @@ def enhance_image (img, config):
 def main():
     
     #Load image
-    img = load_image("/Users/matiyasdawit/Downloads/my_photo.jpg")
+    img = load_image("ex_photo.jpg")
     
     config = {
-        "brightness": 30,
+        "brightness": 90,
         "contrast": 1.2,
         "normalize": False,
         "stretch": True,
@@ -56,3 +56,8 @@ def main():
     save_image(new_image, "enhanced_new_photo.jpg")
     
     image_info(new_image)
+    
+
+
+if __name__ == "__main__":
+    main()
