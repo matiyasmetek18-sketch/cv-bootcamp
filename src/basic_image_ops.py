@@ -1,6 +1,6 @@
 import numpy as np
 import cv2 as cv
-import matplotlib as plt 
+import matplotlib.pyplot as plt 
 import os 
 from os import listdir
 from PIL import Image
@@ -21,7 +21,7 @@ def is_gray(img):
   
   :param img: image array to be tested
   '''
-  return len(img.size) == 2
+  return len(img.shape) == 2
 
 
 def image_info(img):
@@ -86,7 +86,7 @@ def to_grayscale(img):
   
   check_if_valid(img)
   
-  if len(img.size) == 2:
+  if len(img.shape) == 2:
     raise ValueError('This image is already in grayscale')
   
   gray_img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
@@ -293,6 +293,7 @@ def compute_color_histogram(img):
   :param img: color image
   '''
   rgb_img = img
+  rgb_img = rgb_img.astype('uint8')
   
   if is_gray(img):
     rgb_img = cv.cvtColor(img, cv.COLOR_GRAY2RGB)
@@ -316,7 +317,7 @@ def compute_color_histogram(img):
       r_hist_array[j] += 1
       
   
-  return {'B: ': b_hist_array, 'G: ': g_hist_array, 'R: ': r_hist_array}
+  return r_hist_array, g_hist_array, b_hist_array
 
 def plot_histogram(hist):
   '''
@@ -724,10 +725,4 @@ def contrast_stretch(img):
           red[i, j] = 255
     
   
-  return img_copy
-
-  
-def histogram_equalization(img):
-  if is_gray(img):
-    compute_histogram(img)
-    
+  return img_copy    

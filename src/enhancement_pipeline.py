@@ -1,4 +1,5 @@
 from basic_image_ops import *
+import argparse
 
 def enhance_image (img, config):
     img_copy = img.copy()
@@ -8,16 +9,27 @@ def enhance_image (img, config):
     norm_value = config["normalize"]
     stretch_value = config["stretch"]
     plot_hist = config["plot_histogram"]
+    equalize_value = config["equalize"]
+    clahe_value = config["clahe"]
+    
+    
+    histogram_equalization(img_copy)
     
     if plot_hist:
         if is_gray(img_copy):
             hist = compute_histogram(img_copy)
             plot_histogram(hist)
         else:
-            hist = compute_color_histogram(img_copy)
-            plot_color_histogram(hist)
+            hist_r, hist_g, hist_b = compute_color_histogram(img_copy)
+            plot_color_histogram(hist_r, hist_g, hist_b)
     
     
+    if clahe_value:
+        img_copy = histogram_equalization_clache_grayscale(img_copy)
+    
+    if equalize_value:
+        img_copy = histogram_equalization(img_copy)
+        
     img_copy = adjust_brightness(img_copy, bright_value)
     
     
@@ -31,8 +43,8 @@ def enhance_image (img, config):
             hist = compute_histogram(img_copy)
             plot_histogram(hist)
         else:
-            hist = compute_color_histogram(img_copy)
-            plot_color_histogram(hist)
+            hist_r, hist_g, hist_b = compute_color_histogram(img_copy)
+            plot_color_histogram(hist_r, hist_g, hist_b)
         
 
     return img_copy
@@ -41,14 +53,18 @@ def enhance_image (img, config):
 def main():
     
     #Load image
-    img = load_image("ex_photo.jpg")
+    img = load_image("/Users/matiyasdawit/Desktop/Computer_Vision_Project/cv-bootcamp/src/ex_photo.jpg")
     
     config = {
-        "brightness": 90,
-        "contrast": 1.2,
-        "normalize": False,
+        "brightness": 120,
+        "contrast": -1.2,
         "stretch": True,
-        "plot_histogram": True
+        "plot_histogram": True,
+        "normalize": False,
+        "equalize": True,
+        "clahe": False,
+        "gamma": False,
+        "white_balance": False,
     }
     
     new_image = enhance_image(img, config)
@@ -58,6 +74,51 @@ def main():
     image_info(new_image)
     
 
+def histogram_equalization(img):
+    '''
+    This function applies histogram equalization to the whole image
+    
+    :param img: image to be proccessed
+    '''
+    
+    new_img = img.copy()
+    org_img = img.copy()
+    
+    if not is_gray(new_img):
+        new_img = to_grayscale(img)
+    
+    gray_img = new_img.copy()
+    
+    gray_img = gray_img.astype('uint8')
+    gray_img = cv.equalizeHist(gray_img)
+    
+    return gray_img
 
+def histogram_equalization_clache_grayscale(img, clip_limit = 10, grid_size=(8, 8)):
+    '''
+    Applies CACHE (Contrast Limited Adaptive Histogram Equalization) to an grayscale image
+    or just a single channel
+    
+    
+    :param img: uint8 numpy array of shape (heigth, width)
+    :param clip_limit: maximum allowed value for each histogram bin
+    :param grid_size: Tuple (n_rows, n_cols) indicating the number of regions the image is divided
+    into
+    '''
+    
+    new_img = img.copy()
+    if not is_gray(img):
+        new_img = to_grayscale(new_img)
+    
+    gray_img = new_img.copy()
+    
+    clahe = cv.createCLAHE(clip_limit, grid_size)
+    cl1 = clahe.apply(gray_img)
+    
+    cv.imwrite('clahe_2.jpg', cl1)
+    
+    return cl1
+        
+    
 if __name__ == "__main__":
     main()
