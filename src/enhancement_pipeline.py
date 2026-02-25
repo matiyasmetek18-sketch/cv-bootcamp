@@ -11,6 +11,7 @@ def enhance_image (img, config):
     plot_hist = config["plot_histogram"]
     equalize_value = config["equalize"]
     clahe_value = config["clahe"]
+    white_balance_value = config["white_balance"]
     
     
     histogram_equalization(img_copy)
@@ -29,6 +30,9 @@ def enhance_image (img, config):
     
     if equalize_value:
         img_copy = histogram_equalization(img_copy)
+    
+    if white_balance_value:
+        img_copy = gray_world(img_copy)
         
     img_copy = adjust_brightness(img_copy, bright_value)
     
@@ -118,7 +122,40 @@ def histogram_equalization_clache_grayscale(img, clip_limit = 10, grid_size=(8, 
     cv.imwrite('clahe_2.jpg', cl1)
     
     return cl1
+
+def adjust_gamma(img, gamma):
+    '''
+    This fucntion will apply gamma correction for displaying images on the screen correctly 
+    This will help to linearize the percieved brightness
+    
+    :param img: is the image to be proccessed 
+    :param gamma: the scale in which the image brightness will be adjusted 
+    '''
+    if gamma <= 0:
+        raise ValueError('Invalid gamma value')
+    new_img = img.copy()
+    
+    gamma_corrected = np.array(255 * (new_img.astype(float) / 255.0) ** gamma, dtype = 'uint8')
+    
+    return gamma_corrected
         
+
+def gray_world(img):
+    '''
+    This function will white balance the image using the gray-world algorithm
+    
+    :param img: image to be processed
+    '''
+    new_img = img.copy()
+    img_LAB = cv.cvtColor(new_img, cv.COLOR_BGR2LAB)
+    avg_a = np.average(img_LAB[:, :, 1])
+    avg_b = np.average(img_LAB[:, :, 2])
+    img_LAB[:, :, 1] = img_LAB[:, :, 1] - ((avg_a - 128) * (img_LAB[:, :, 0] / 255.0) * 1.2)
+    img_LAB[:, :, 2] = img_LAB[:, :, 2] - ((avg_b - 128) * (img_LAB[:, :, 0] / 255.0) * 1.2)
+    
+    balanced_img = cv.cvtColor(img_LAB, cv.COLOR_LAB2BGR)
+    
+    return balanced_img
     
 if __name__ == "__main__":
     main()
