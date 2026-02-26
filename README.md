@@ -209,7 +209,7 @@ This milestone introduced the most advanced enhacement operations in the entire 
 - Understanding LAB space felt like a big leap in my CV knowledge
 - CLAHE made me appreciate how real imaging systems enhance low-light photos
 
-##  Milestone 6 — Full Enahcement Pipeline Integration
+##  Milestone 7 — Full Enahcement Pipeline Integration
 *Completed over several real days*
 
 ###  Overview   
