@@ -41,7 +41,7 @@ def enhance_image (img, config):
         img_copy = to_grayscale(img_copy)
     
     if clahe_value:
-        img_copy = histogram_equalization_clache_grayscale(img_copy)
+        img_copy = histogram_equalization_clahe_grayscale(img_copy)
         
     elif equalize_value:
         img_copy = histogram_equalization(img_copy)

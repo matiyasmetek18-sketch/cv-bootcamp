@@ -747,7 +747,7 @@ def histogram_equalization(img):
     
     return gray_img
 
-def histogram_equalization_clache_grayscale(img, clip_limit = 10, grid_size=(8, 8)):
+def histogram_equalization_clahe_grayscale(img, clip_limit = 10, grid_size=(8, 8)):
     '''
     Applies CACHE (Contrast Limited Adaptive Histogram Equalization) to an grayscale image
     or just a single channel
@@ -878,3 +878,27 @@ def hist_before_after(original, enhanced, title_before = 'Original', title_after
   plt.suptitle('Histogram comparision')
   
   plt.tight_layout()
+
+def clahe_eqlz_before_after(img):
+  
+  plt.figure(figsize = (10,6))
+  
+  plt.subplot(1, 3, 1)
+  plt.imshow(img)
+  plt.title('Original image')
+  
+  if not is_gray(img):
+    gray_img = to_grayscale(img)
+  
+  eqlz_img = histogram_equalization(gray_img)
+  
+  plt.subplot(1, 3, 2)
+  plt.imshow(eqlz_img)
+  plt.title('Equalized image')
+  
+  clah_img = histogram_equalization_clahe_grayscale(gray_img)
+  
+  plt.subplot(1, 3, 3)
+  plt.imshow(clah_img)
+  plt.title('Clahe equalized image')
+  
