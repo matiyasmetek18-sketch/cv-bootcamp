@@ -902,3 +902,5 @@ def clahe_eqlz_before_after(img):
   plt.imshow(clah_img)
   plt.title('Clahe equalized image')
   
+  plt.suptitle('CLAHE‑vs‑Equalization comparison')
+  
