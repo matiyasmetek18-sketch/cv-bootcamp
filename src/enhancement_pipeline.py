@@ -11,10 +11,10 @@ def enhance_image (img, config):
     plot_hist = config["plot_histogram"]
     equalize_value = config["equalize"]
     clahe_value = config["clahe"]
+    gamma_value = config["gamma"]
+    gamma_number = config["gamma_value"]
     white_balance_value = config["white_balance"]
-    
-    
-    histogram_equalization(img_copy)
+
     
     if plot_hist:
         if is_gray(img_copy):
@@ -25,19 +25,27 @@ def enhance_image (img, config):
             plot_color_histogram(hist_r, hist_g, hist_b)
     
     
-    if clahe_value:
-        img_copy = histogram_equalization_clache_grayscale(img_copy)
-    
-    if equalize_value:
-        img_copy = histogram_equalization(img_copy)
-    
     if white_balance_value:
         img_copy = gray_world(img_copy)
         
+    if gamma_value:
+        img_copy = adjust_gamma(img_copy, gamma_number)
+        
+    
     img_copy = adjust_brightness(img_copy, bright_value)
-    
-    
+
     img_copy = adjust_contrast(img_copy, contrast_value)
+        
+    
+    if clahe_value or equalize_value:
+        img_copy = to_grayscale(img_copy)
+    
+    if clahe_value:
+        img_copy = histogram_equalization_clache_grayscale(img_copy)
+        
+    elif equalize_value:
+        img_copy = histogram_equalization(img_copy)
+        
     if norm_value:
         img_copy = normalize_image(img_copy)
     if stretch_value:
@@ -68,6 +76,7 @@ def main():
         "equalize": True,
         "clahe": False,
         "gamma": False,
+        "gamma_value": 1.2,
         "white_balance": False,
     }
     
