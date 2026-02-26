@@ -177,4 +177,70 @@ Implemeneted a full suite of intensity transformations. These functions adjust p
 - It was the second most challenging part of the project so far
 - It was easier since I did similar logic prior to this Milestone in Milestone 4
 - I felt myself thinking more like an engineer more than a student
-- The repetition across channels helped me internalize the structure 
+- The repetition across channels helped me internalize the structure
+
+##  Milestone 6 — Advanced Enahcement operations
+*Completed over several real days*
+
+###  Overview   
+This milestone introduced the most advanced enhacement operations in the entire project. I implemented gamma co-relation, LAB-based white balance, and CLAHE (adaptive histogram equalization). These functions required deeper conceptual understanding and careful ordering inside the pipeline
+
+###  Features Completed 
+- Implemented:
+  - `adjust_gamma`
+  - `gray_world`
+  - `histogram_equalization_clache_grayscale`
+
+- Added:
+  - Safe float-based gamma transformation
+  - Per channel LAB chromaticity correction
+  - Tile-based adaptive contrast enhacement
+  - Explicit grayscale conversion before local contrast operations
+
+###  Learned 
+- How gamma affects mid-tones and percieved brightness
+- Why white balance must happen before grayscale conversion
+- How LAB color space separates luminance from chromaticity
+- Why CLAHE avoids noise amplification compared to global equalization
+- How to design mutually exclusive enhacement paths (CLAHE vs Equalization)
+
+###  Reflection 
+- This was one of the most conceptually challenging milestones
+- Understanding LAB space felt like a big leap in my CV knowledge
+- CLAHE made me appreciate how real imaging systems enhance low-light photos
+
+##  Milestone 6 — Full Enahcement Pipeline Integration
+*Completed over several real days*
+
+###  Overview   
+This milestone brought everything together into a single, professional-grade enahcement pipeline. I designed ```enhance_image()``` to apply operations in the correct order, handle color vs grayscale transitions, and support a flexible configuration system
+
+###  Features Completed 
+- Implemented the full enhacement pipeline:
+  - White balance
+  - Gamma correction
+  - Brightness adjustement
+  - Contrast adjustment
+  - Grayscale conversion (when needed)
+  - CLAHE or Histogram equalization
+  - Normalization
+  - Contrast stretching
+
+- Added:
+  - Before/After histogram equalization
+  - Clean config-driven architecture
+  - Mutually exclusive CLAHE/equalization logic
+  - Intentional ordering to avoid destructive interactions
+
+###  Learned 
+- How to design a real CV pipeline with intentional ordering
+- How to avoid conflicts between color and grayscale operations
+- How to build a modular, readable, and maintainable enahcement engine
+- How to think about image processing as a sequence of transformations, not isolated functions
+
+###  Reflection 
+- This was a smooth milestone for me, I enjoyed lookign for solutions online
+- The pipeline felt like a real tool, not just a collection of functions
+- I now understand how professinal CV systems structure enhacnement workflows
+- This milestone made the project "portfolio-ready"
+
