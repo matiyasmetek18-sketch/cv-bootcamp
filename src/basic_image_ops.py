@@ -725,4 +725,77 @@ def contrast_stretch(img):
           red[i, j] = 255
     
   
-  return img_copy    
+  return img_copy
+
+def plot_before_after(original, enhanced, title_before = 'Original', title_after = 'Enhanced'):
+  '''
+  This function will show the a side-by-side images of any combination. It could be grayscaled or 
+  RGB images side by side. Gray -> Gray, RGB -> RGB, Gray -> RGB, etc
+  
+  :param original: is the original image
+  :param enhanced: is the enhanced image
+  :param title_before: the title of the original image
+  :param title_after: the title of the enhanced image
+  '''
+  plt.figure(figsize = (10,6))
+  
+  plt.subplot(1, 2, 1)
+  
+  if is_gray(original):
+    plt.imshow(original, cmap='gray')
+  else:
+    plt.imshow(original)
+  
+  plt.title(title_before)
+  plt.axis('off')
+  
+  plt.subplot(1, 2, 2)
+  
+  if is_gray(enhanced):
+    plt.imshow(enhanced, cmap='gray')
+  else:
+    plt.imshow(enhanced)
+    
+  plt.title(title_after)
+  plt.axis('off')
+  
+  plt.tight_layout()
+  plt.show()
+  
+def hist_before_after(original, enhanced, title_before = 'Original', title_after = 'Enhanced'):
+  '''
+  This function will show a side-by-side figure of a histogram before and after enhancement to show 
+  how the pixel distribution changed 
+  
+  :param original: is the original image
+  :param enhanced: is the enhanced enhanced with the changed pixel distribution 
+  :param title_before: title of the original histogram
+  :param title_after: title of the enhanced histogram
+  '''
+  plt.figure(figsize = (10,6))
+  
+  plt.subplot(1, 2, 1)
+  
+  plt.suptitle('Histogram comparision')
+  
+  if is_gray(original):
+      hist = compute_histogram(original)
+      plot_histogram(hist)
+  else:
+      hist_r, hist_g, hist_b = compute_color_histogram(original)
+      plot_color_histogram(hist_r, hist_g, hist_b)
+  
+  plt.title(title_before)
+  
+  plt.subplot(1, 2, 2)
+  
+  if is_gray(enhanced):
+      hist = compute_histogram(enhanced)
+      plot_histogram(hist)
+  else:
+      hist_r, hist_g, hist_b = compute_color_histogram(enhanced)
+      plot_color_histogram(hist_r, hist_g, hist_b)
+  
+  plt.title(title_after)
+  
+  plt.tight_layout()
