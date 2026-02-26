@@ -776,8 +776,6 @@ def hist_before_after(original, enhanced, title_before = 'Original', title_after
   
   plt.subplot(1, 2, 1)
   
-  plt.suptitle('Histogram comparision')
-  
   if is_gray(original):
       hist = compute_histogram(original)
       plot_histogram(hist)
@@ -797,5 +795,7 @@ def hist_before_after(original, enhanced, title_before = 'Original', title_after
       plot_color_histogram(hist_r, hist_g, hist_b)
   
   plt.title(title_after)
+  
+  plt.suptitle('Histogram comparision')
   
   plt.tight_layout()
