@@ -880,12 +880,19 @@ def hist_before_after(original, enhanced, title_before = 'Original', title_after
   plt.tight_layout()
 
 def clahe_eqlz_before_after(img):
+  '''
+  This function will show a side-by-side figure of an orginal, equalized and clahe equalized image
   
+  :param img: image to be shown and processed
+  '''
   plt.figure(figsize = (10,6))
   
+  gray_img = img.copy()
+  
   plt.subplot(1, 3, 1)
-  plt.imshow(img)
+  plt.imshow(gray_img)
   plt.title('Original image')
+  plt.axis('off')
   
   if not is_gray(img):
     gray_img = to_grayscale(img)
@@ -893,14 +900,16 @@ def clahe_eqlz_before_after(img):
   eqlz_img = histogram_equalization(gray_img)
   
   plt.subplot(1, 3, 2)
-  plt.imshow(eqlz_img)
+  plt.imshow(eqlz_img, cmap='gray')
   plt.title('Equalized image')
+  plt.axis('off')
   
   clah_img = histogram_equalization_clahe_grayscale(gray_img)
   
   plt.subplot(1, 3, 3)
-  plt.imshow(clah_img)
+  plt.imshow(clah_img, cmap='gray')
   plt.title('Clahe equalized image')
+  plt.axis('off')
   
   plt.suptitle('CLAHE‑vs‑Equalization comparison')
   
