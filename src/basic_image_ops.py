@@ -886,20 +886,26 @@ def clahe_eqlz_before_after(img):
   '''
   plt.figure(figsize = (10,6))
   
-  gray_img = img.copy()
+  img_copy = img.copy()
   
   plt.subplot(1, 3, 1)
-  plt.imshow(gray_img)
+  if is_gray(img):
+    plt.imshow(img_copy, cmap = 'gray')
+  else:
+    plt.imshow(img_copy)  
+    
   plt.title('Original image')
   plt.axis('off')
   
+  gray_img = img_copy()
+  
   if not is_gray(img):
-    gray_img = to_grayscale(img)
+    gray_img = to_grayscale(img_copy)
   
   eqlz_img = histogram_equalization(gray_img)
   
   plt.subplot(1, 3, 2)
-  plt.imshow(eqlz_img, cmap='gray')
+  plt.imshow(eqlz_img, cmap = 'gray')
   plt.title('Equalized image')
   plt.axis('off')
   
