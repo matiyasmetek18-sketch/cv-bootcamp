@@ -244,3 +244,27 @@ This milestone brought everything together into a single, professional-grade ena
 - I now understand how professinal CV systems structure enhacnement workflows
 - This milestone made the project "portfolio-ready"
 
+##  Milestone 8 — Visualization and comparison tools
+*Completed in a day*
+
+###  Overview   
+This milestone focused on building a complete visualization suite to help me understand, debug, and communicate the effects of each enhacement operation in my pipeline. These tools are now part of the project and will also be used in the final README examples
+
+###  Features Completed 
+- Implemented:
+  - Before and After Image comparision
+  - Before and After Histogram comparision
+  - CLAHE vs Equalization Comparison
+
+###  Learned 
+- How to design visualzation utilites that work for both grayscale and RGB images
+- How to use histograms to intepret enhancement behavior
+- How global equalization differs from CLAHE in practice
+- How to structure Matplotlib figures cleanly using subplots, titles, and layout management
+- How visualization helps validate the correctness of each enhancement step 
+
+###  Reflection 
+- This pipeline felt more "real" and more developed
+- This milestone is like showing the summary of what I have worked on so far visually
+
+
