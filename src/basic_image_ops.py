@@ -876,7 +876,6 @@ def hist_before_after(original, enhanced, title_before = 'Original', title_after
   plt.title(title_after)
   
   plt.suptitle('Histogram comparision')
-  
   plt.tight_layout()
 
 def clahe_eqlz_before_after(img):
@@ -912,4 +911,5 @@ def clahe_eqlz_before_after(img):
   plt.axis('off')
   
   plt.suptitle('CLAHE‑vs‑Equalization comparison')
+  plt.tight_layout()
   
