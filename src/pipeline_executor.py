@@ -1,4 +1,5 @@
 import cv2 as cv
+import json 
 
 class PipelineExecutor:
     def __init__(self, config_path):
@@ -13,9 +14,9 @@ class PipelineExecutor:
         '''
         self.config_path = config_path
         
-        self._load_config(config_path)
+        self._load_config()
         
-        self.original_image = cv.imread(config_path)
+        self.original_image = None
         self.processed_image = None
         
     def _load_config(self):
@@ -28,6 +29,7 @@ class PipelineExecutor:
         
         :param self: an instance of this class
         '''
+        
         pass
     
     def _load_image(self):
