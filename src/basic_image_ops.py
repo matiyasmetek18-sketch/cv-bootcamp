@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import os 
 from os import listdir
 from PIL import Image
+import json 
 
 
 def check_if_valid(img):
@@ -421,6 +422,7 @@ def adjust_brightness(img, value):
       
       for j in range(column_r):
         red[i, j] += value
+        
         if red[i, j] < 0:
           red[i, j] = 0
         elif red[i, j] > 255:

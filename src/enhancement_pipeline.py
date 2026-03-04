@@ -69,14 +69,14 @@ def main():
     
     config = {
         "brightness": 120,
-        "contrast": -1.2,
+        "contrast": 22,
         "stretch": True,
         "plot_histogram": True,
         "normalize": False,
         "equalize": True,
         "clahe": False,
         "gamma": False,
-        "gamma_value": 1.2,
+        "gamma_value": 5,
         "white_balance": False,
     }
     
