@@ -1,6 +1,7 @@
 import cv2 as cv
 import json 
-from basic_image_ops import check_if_valid
+from operation_registry import OPERATION_REGISTRY
+
 class PipelineExecutor:
     def __init__(self, config_path):
         '''
@@ -80,7 +81,11 @@ class PipelineExecutor:
         :param self: an instance of this class
         :param operation_dict: is the operation dictionary of the config file 
         '''
-        pass
+        op_name = operation_dict['name']
+        func = OPERATION_REGISTRY[op_name]
+        copy_dict = operation_dict.copy()
+        copy_dict.pop('name')
+        self.processed_image = func(self.processed_image, **copy_dict)
     
     def _save_output(self):
         '''
