@@ -29,8 +29,30 @@ class PipelineExecutor:
         
         :param self: an instance of this class
         '''
-        
-        pass
+        with open(self.config_path) as json_file:
+            data = json.load(json_file)
+                
+            if 'input' not in data or 'output' not in data or 'operations' not in data:
+                raise ValueError('Missing key in the JSON file')
+            
+            if 'visualize' not in data:
+                data['visualize'] = {}
+            
+            operations = data['operations']
+            
+            if type(operations) is not list:
+                raise ValueError('Operations is not a list')
+            
+            # checking if operations has only dictionaries
+            for i in operations:
+                if type(i) is not dict:
+                    raise ValueError('This operation is not a dictionary')
+                
+                # chekcing to see if 'name' is in every dictionary
+                if 'name' not in i:
+                    raise ValueError('Missing \'name\' in the dictionaries')
+            
+            self.config = data
     
     def _load_image(self):
         '''
