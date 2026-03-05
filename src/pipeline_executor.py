@@ -1,6 +1,6 @@
 import cv2 as cv
 import json 
-
+from basic_image_ops import check_if_valid
 class PipelineExecutor:
     def __init__(self, config_path):
         '''
@@ -56,14 +56,20 @@ class PipelineExecutor:
     
     def _load_image(self):
         '''
-        This function should reads and validates the image path 
+        This function should read and validate the image path 
         from self.config["input"]
         It stores self.original_image (the original/unchanged image) and 
         self.procesed_image
         
         :param self: an instance of this class
         '''
-        pass
+        self.original_image = cv.imread(self.config['input'])
+        
+        if self.original_image is None:
+            raise ValueError('The image path in pipleline_executor is invalid')
+        
+        self.processed_image = self.original_image.copy()
+        
     
     def _apply_operation(self, operation_dict):
         '''
