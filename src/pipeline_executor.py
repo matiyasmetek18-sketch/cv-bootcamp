@@ -95,7 +95,8 @@ class PipelineExecutor:
         
         :param self: an instance of this class
         '''
-        pass
+        output_path = self.config['output']
+        return cv.imwrite(output_path, self.processed_image)
     
     def _visualize(self):
         '''
@@ -114,4 +115,15 @@ class PipelineExecutor:
         
         :param self: an instance of this class 
         '''
-        pass
+        self._load_config()
+        self._load_image()
+        
+        with open(self.config_path) as json_file:
+            data = json.load(json_file)
+            
+            operations = data['operations']
+            
+            for i in operations:
+                self._apply_operation(i)
+        
+        
