@@ -517,109 +517,22 @@ def normalize_image(img):
   
   img_copy = img.copy()
   
+  gray_img = img_copy.copy()
+  
+  if not is_gray(img_copy):
+    gray_img = to_grayscale(img_copy)
+    
+  normal_gray_img = cv.normalize(gray_img, None, alpha = 0, beta = 255, norm_type = cv.NORM_MINMAX)
+  
+  
+  normal_color_img = cv.cvtColor(normal_gray_img, cv.COLOR_GRAY2BGR)
+  
   if is_gray(img_copy):
-    max = 0 
-    min = 255
-    
-    row, column = img_copy.shape
-    
-    for i in range(row):
-      
-      for j in range(column):
-        if max < img_copy[i, j]: 
-          max = img_copy[i, j]
-        if min > img_copy[i, j]: 
-          min = img_copy[i, j]
-    
-    for i in range(row):
-      
-      for j in range(column):
-        img_copy[i, j] -= min
-        if not (max - min == 0):
-          img_copy[i, j] /= (max - min)
-        img_copy[i, j] += 255
-        
-        if img_copy[i, j] < 0: 
-          img_copy[i, j] = 0
-        elif img_copy[i, j] > 255: 
-          img_copy[i, j] = 255
-  
-  else:
-    blue = img_copy[..., 0]
-    green = img_copy[..., 1]
-    red = img_copy[..., 2]
-    
-    max = 0
-    min = 255
-    
-    row_b, column_b = blue.shape
-    row_g, column_g = green.shape
-    row_r, column_r = red.shape
-    
-    for i in range(row_b):
-      for j in range(column_b):
-        if max < blue[i, j]: 
-          max = blue[i, j]
-        if min > blue[i, j]: 
-          min = blue[i, j]
-        
-    for i in range(row_b):
-      for j in range(column_b):
-        blue[i, j] -= min
-        if not (max - min == 0):
-          blue[i, j] /= (max - min)
-        blue[i, j] += 255
-        
-        if blue[i, j] < 0: 
-          blue[i, j] = 0
-        elif blue[i, j] > 255: 
-          blue[i, j] = 255
-    
-    max = 0
-    min = 255
-          
-    for i in range(row_g):
-      for j in range(column_g):
-        if max < green[i, j]: 
-          max = green[i, j]
-        if min > green[i, j]: 
-          min = green[i, j]
-        
-    for i in range(row_g):
-      for j in range(column_g):
-        green[i, j] -= min
-        if not (max - min == 0):
-          green[i, j] /= (max - min)
-        green[i, j] += 255
-        
-        if green[i, j] < 0: 
-          green[i, j] = 0
-        elif green[i, j] > 255: 
-          green[i, j] = 255
+    return normal_gray_img
 
-    max = 0
-    min = 255
-    
-    for i in range(row_r):
-      for j in range(column_r):
-        if max < red[i, j]: 
-          max = red[i, j]
-        if min > red[i, j]: 
-          min = red[i, j]
-        
-    for i in range(row_r):
-      for j in range(column_r):
-        red[i, j] -= min
-        if not (max - min == 0):
-          red[i, j] /= (max - min)
-        red[i, j] += 255
-        
-        if red[i, j] < 0: 
-          red[i, j] = 0
-        elif red[i, j] > 255: 
-          red[i, j] = 255
-  
-  return img_copy
+  else:
+    return normal_color_img
+
   
 
 def contrast_stretch(img):
@@ -630,114 +543,25 @@ def contrast_stretch(img):
   
   :param img: input image (color or grayscale)
   '''
+  check_if_valid(img)
+  
   img_copy = img.copy()
   
-  max = 0
-  min = 255
+  gray_img = img_copy.copy()
+  
+  if not is_gray(img_copy):
+    gray_img = to_grayscale(img_copy)
+    
+  contrast_gray_img = cv.normalize(gray_img, None, alpha = 0, beta = 255, norm_type = cv.NORM_MINMAX)
+  
+  
+  contrast_color_img = cv.cvtColor(contrast_gray_img, cv.COLOR_GRAY2BGR)
   
   if is_gray(img_copy):
-    
-    row, column = img.shape
-    
-    for i in range(row):
-      for j in range(column):
-        if max < img_copy[i, j]:
-          max = img_copy[i, j]
-        if min > img_copy[i, j]:
-          min = img_copy[i, j]
-    
-    for i in range(row):
-      for j in range(column):
-        img_copy[i, j] -= min
-        if not (max - min == 0):
-          img_copy[i, j] /= (max - min)
-        img_copy[i, j] *= 255
-        
-        if img_copy[i, j] < 0:
-          img_copy[i, j] = 0
-        elif img_copy[i, j] > 255:
-          img_copy[i, j] = 255
-  
+    return contrast_gray_img
+
   else:
-    max = 0
-    min = 255
-    
-    blue = img_copy[..., 0]
-    green = img_copy[..., 1]
-    red = img_copy[..., 2]
-    
-    row_b, column_b = blue.shape
-    
-    for i in range(row_b):
-      for j in range(column_b):
-        if max < blue[i, j]:
-          max = blue[i, j]
-        if min > blue[i, j]:
-          min = blue[i, j]
-    
-    for i in range(row_b):
-      for j in range(column_b):
-        blue[i, j] -= min
-        if not (max - min == 0):
-          blue[i, j] /= (max - min)
-        blue[i, j] *= 255
-        
-        if blue[i, j] < 0:
-          blue[i, j] = 0
-        elif blue[i, j] > 255:
-          blue[i, j] = 255
-          
-    
-    max = 0
-    min = 255
-    
-    row_g, column_g = green.shape
-    
-    for i in range(row_g):
-      for j in range(column_g):
-        if max < green[i, j]:
-          max = green[i, j]
-        if min > green[i, j]:
-          min = green[i, j]
-    
-    for i in range(row_g):
-      for j in range(column_g):
-        green[i, j] -= min
-        if not (max - min == 0):
-          green[i, j] /= (max - min)
-        green[i, j] *= 255
-        
-        if green[i, j] < 0:
-          green[i, j] = 0
-        elif green[i, j] > 255:
-          green[i, j] = 255
-    
-    max = 0
-    min = 255
-    
-    row_r, column_r = red.shape
-    
-    for i in range(row_r):
-      for j in range(column_r):
-        if max < red[i, j]:
-          max = red[i, j]
-        if min > red[i, j]:
-          min = red[i, j]
-    
-    for i in range(row_r):
-      for j in range(column_r):
-        red[i, j] -= min
-        if not (max - min == 0):
-          red[i, j] /= (max - min)
-        red[i, j] *= 255
-        
-        if red[i, j] < 0:
-          red[i, j] = 0
-        elif red[i, j] > 255:
-          red[i, j] = 255
-    
-  
-  return img_copy
+    return contrast_color_img
 
 def histogram_equalization(img):
     '''

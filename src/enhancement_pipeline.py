@@ -32,25 +32,58 @@ def enhance_image (img, config):
         img_copy = adjust_gamma(img_copy, gamma_number)
         
     
+    print('\nBefore Brightness')
+    image_info(img_copy)
     img_copy = adjust_brightness(img_copy, bright_value)
 
+    print('\nAfter Brightness')
+    image_info(img_copy)
+    
+    print('\nBefore Contrast')
+    image_info(img_copy)
     img_copy = adjust_contrast(img_copy, contrast_value)
         
+    print('\nAfter Contrast')
+    image_info(img_copy)
     
     if clahe_value or equalize_value:
         img_copy = to_grayscale(img_copy)
     
     if clahe_value:
+        print('\nBefore Clahe')
+        image_info(img_copy)
+        
         img_copy = histogram_equalization_clahe_grayscale(img_copy)
         
+        print('\nAfter Clahe')
+        image_info(img_copy)
+        
     elif equalize_value:
+        print('\nBefore equalize')
+        image_info(img_copy)
+        
         img_copy = histogram_equalization(img_copy)
         
+        print('\nAfter equalize')
+        image_info(img_copy)
+        
     if norm_value:
+        print('\nBefore normalization')
+        image_info(img_copy)
+        
         img_copy = normalize_image(img_copy)
         
+        print('\nAfter normalization')
+        image_info(img_copy)
+        
     if stretch_value:
+        print('\nBefore contrast')
+        image_info(img_copy)
+        
         img_copy = contrast_stretch(img_copy)
+        
+        print('\nAfter contrast')
+        image_info(img_copy)
         
     if plot_hist:
         if is_gray(img_copy):
@@ -70,22 +103,26 @@ def main():
     img = load_image("/Users/matiyasdawit/Desktop/Computer_Vision_Project/cv-bootcamp/src/ex_photo.jpg")
     
     config = {
-        "brightness": 2,
+        "brightness": 0,
         "contrast": 0.7,
         "stretch": False,
-        "plot_histogram": False,
+        "plot_histogram": True,
         "normalize": True,
-        "equalize": False,
-        "clahe": False,
+        "equalize": True,
+        "clahe": True,
         "gamma": False,
         "gamma_value": 5,
         "white_balance": False,
     }
     
+    print('\nBefore enhacmenent')
+    image_info(img)
+    
     new_image = enhance_image(img, config)
     
     save_image(new_image, "enhanced_new_photo.jpg")
     
+    print('\nAfter enhacmenent')
     image_info(new_image)
     
     
