@@ -520,18 +520,12 @@ def normalize_image(img):
   gray_img = img_copy.copy()
   
   if not is_gray(img_copy):
-    gray_img = to_grayscale(img_copy)
-    
-  normal_gray_img = cv.normalize(gray_img, None, alpha = 0, beta = 255, norm_type = cv.NORM_MINMAX)
-  
-  
-  normal_color_img = cv.cvtColor(normal_gray_img, cv.COLOR_GRAY2BGR)
-  
-  if is_gray(img_copy):
-    return normal_gray_img
-
-  else:
+    normal_color_img = cv.normalize(img_copy, None, 0, 255, cv.NORM_MINMAX)
     return normal_color_img
+  else:
+    gray_img = to_grayscale(img_copy)
+    normal_gray_img = cv.normalize(gray_img, None, alpha = 0, beta = 255, norm_type = cv.NORM_MINMAX)
+    return normal_gray_img
 
   
 
@@ -550,18 +544,12 @@ def contrast_stretch(img):
   gray_img = img_copy.copy()
   
   if not is_gray(img_copy):
-    gray_img = to_grayscale(img_copy)
-    
-  contrast_gray_img = cv.normalize(gray_img, None, alpha = 0, beta = 255, norm_type = cv.NORM_MINMAX)
-  
-  
-  contrast_color_img = cv.cvtColor(contrast_gray_img, cv.COLOR_GRAY2BGR)
-  
-  if is_gray(img_copy):
-    return contrast_gray_img
-
-  else:
+    contrast_color_img = cv.normalize(img_copy, None, 0, 255, cv.NORM_MINMAX)
     return contrast_color_img
+  else:
+    gray_img = to_grayscale(img_copy)
+    contrast_gray_img = cv.normalize(gray_img, None, alpha = 0, beta = 255, norm_type = cv.NORM_MINMAX)
+    return contrast_gray_img
 
 def histogram_equalization(img):
     '''
@@ -618,10 +606,10 @@ def adjust_gamma(img, gamma):
         raise ValueError('Invalid gamma value')
     new_img = img.copy()
     
-    gamma_corrected = np.array(255 * (new_img.astype(float) / 255.0) ** gamma, dtype = 'uint8')
+    invGamma = 1.0 / gamma
+    gamma_corrected = np.array(255 * (invGamma / 255.0) ** gamma, dtype = 'uint8')
     
     return gamma_corrected
-        
 
 def gray_world(img):
     '''
