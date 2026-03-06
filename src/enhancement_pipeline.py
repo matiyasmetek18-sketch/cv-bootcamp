@@ -48,8 +48,10 @@ def enhance_image (img, config):
         
     if norm_value:
         img_copy = normalize_image(img_copy)
+        
     if stretch_value:
         img_copy = contrast_stretch(img_copy)
+        
     if plot_hist:
         if is_gray(img_copy):
             hist = compute_histogram(img_copy)
@@ -68,12 +70,12 @@ def main():
     img = load_image("/Users/matiyasdawit/Desktop/Computer_Vision_Project/cv-bootcamp/src/ex_photo.jpg")
     
     config = {
-        "brightness": 120,
-        "contrast": 22,
-        "stretch": True,
-        "plot_histogram": True,
-        "normalize": False,
-        "equalize": True,
+        "brightness": 2,
+        "contrast": 0.7,
+        "stretch": False,
+        "plot_histogram": False,
+        "normalize": True,
+        "equalize": False,
         "clahe": False,
         "gamma": False,
         "gamma_value": 5,

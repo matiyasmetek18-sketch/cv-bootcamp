@@ -38,26 +38,35 @@ def image_info(img):
   if img is not None:
     
     
+    if not is_gray(img):
     # the below will extract heigth, width, channels data from the image
-    height, width, channel = img.shape
+      print(f'The height, width and channel values respectively are: {img.shape}')
     
-    print(f'The height, width and channel values respectively are: {img.shape}')
+      #below is the data type of the array 
+      print(f'The dtype of the image array is: {img.dtype}')
+      
+      #min and max pixel values are below
+      min_blue = img[..., 0].min()
+      min_green = img[..., 1].min()
+      min_red = img[..., 2].min()
+      
+      print(f'Minimum pixel values in (B G R) is:  {min_blue}, {min_green}, {min_red}')
     
-    #below is the data type of the array 
-    print(f'The dtype of the image array is: {img.dtype}')
-    
-    #min and max pixel values are below
-    min_blue = img[..., 0].min()
-    min_green = img[..., 1].min()
-    min_red = img[..., 2].min()
-    
-    print(f'Minimum pixel values in (B G R) is:  {min_blue}, {min_green}, {min_red}')
-  
-    max_blue = img[..., 0].max()
-    max_green = img[..., 1].max()
-    max_red = img[..., 2].max()
-    
-    print(f'Maximum pixel values in (B G R) is:  {max_blue}, {max_green}, {max_red}')
+      max_blue = img[..., 0].max()
+      max_green = img[..., 1].max()
+      max_red = img[..., 2].max()
+      
+      print(f'Maximum pixel values in (B G R) is:  {max_blue}, {max_green}, {max_red}')
+      
+    else:
+      
+      print(f'The height and width values respectively are: {img.shape[:2]}')
+      
+      print(f'The dtype of the image array is: {img.dtype}')
+      
+      print(f'Minimum pixle value is {img.min()}')
+      
+      print(f'Maximumu pixle value is {img.max()}')
   
   
 
@@ -508,11 +517,11 @@ def normalize_image(img):
   
   img_copy = img.copy()
   
-  row, column = img_copy.shape
-  
   if is_gray(img_copy):
     max = 0 
     min = 255
+    
+    row, column = img_copy.shape
     
     for i in range(row):
       
@@ -528,7 +537,7 @@ def normalize_image(img):
         img_copy[i, j] -= min
         if not (max - min == 0):
           img_copy[i, j] /= (max - min)
-        img_copy[i, j] *= 255
+        img_copy[i, j] += 255
         
         if img_copy[i, j] < 0: 
           img_copy[i, j] = 0
@@ -559,7 +568,7 @@ def normalize_image(img):
         blue[i, j] -= min
         if not (max - min == 0):
           blue[i, j] /= (max - min)
-        blue[i, j] *= 255
+        blue[i, j] += 255
         
         if blue[i, j] < 0: 
           blue[i, j] = 0
@@ -581,7 +590,7 @@ def normalize_image(img):
         green[i, j] -= min
         if not (max - min == 0):
           green[i, j] /= (max - min)
-        green[i, j] *= 255
+        green[i, j] += 255
         
         if green[i, j] < 0: 
           green[i, j] = 0
@@ -603,7 +612,7 @@ def normalize_image(img):
         red[i, j] -= min
         if not (max - min == 0):
           red[i, j] /= (max - min)
-        red[i, j] *= 255
+        red[i, j] += 255
         
         if red[i, j] < 0: 
           red[i, j] = 0
@@ -627,6 +636,7 @@ def contrast_stretch(img):
   min = 255
   
   if is_gray(img_copy):
+    
     row, column = img.shape
     
     for i in range(row):
@@ -737,12 +747,10 @@ def histogram_equalization(img):
     '''
     
     new_img = img.copy()
-    org_img = img.copy()
+    gray_img = img.copy()
     
     if not is_gray(new_img):
-        new_img = to_grayscale(img)
-    
-    gray_img = new_img.copy()
+        gray_img = to_grayscale(new_img)
     
     gray_img = gray_img.astype('uint8')
     gray_img = cv.equalizeHist(gray_img)
