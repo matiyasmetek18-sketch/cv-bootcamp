@@ -108,7 +108,7 @@ def main():
         "stretch": True,
         "plot_histogram": False,
         "normalize": True,
-        "equalize": False,
+        "equalize": True,
         "clahe": False,
         "gamma": False,
         "gamma_value": 5,

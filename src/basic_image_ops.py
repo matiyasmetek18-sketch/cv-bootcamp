@@ -523,7 +523,6 @@ def normalize_image(img):
     normal_color_img = cv.normalize(img_copy, None, 0, 255, cv.NORM_MINMAX)
     return normal_color_img
   else:
-    gray_img = to_grayscale(img_copy)
     normal_gray_img = cv.normalize(gray_img, None, alpha = 0, beta = 255, norm_type = cv.NORM_MINMAX)
     return normal_gray_img
 
@@ -547,7 +546,6 @@ def contrast_stretch(img):
     contrast_color_img = cv.normalize(img_copy, None, 0, 255, cv.NORM_MINMAX)
     return contrast_color_img
   else:
-    gray_img = to_grayscale(img_copy)
     contrast_gray_img = cv.normalize(gray_img, None, alpha = 0, beta = 255, norm_type = cv.NORM_MINMAX)
     return contrast_gray_img
 
