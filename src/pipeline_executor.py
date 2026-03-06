@@ -1,6 +1,7 @@
 import cv2 as cv
 import json 
 from operation_registry import OPERATION_REGISTRY
+from visualization_registry import VISUALIZATION_REGISTRY
 
 class PipelineExecutor:
     def __init__(self, config_path):
@@ -104,7 +105,14 @@ class PipelineExecutor:
         
         :param self: an instance of this class
         '''
-        pass
+        visualize = self.config['visualize']
+        for viz_name, value in visualize.items():
+            if value:
+                func = VISUALIZATION_REGISTRY[viz_name]
+                if viz_name == 'plot_before_after' or viz_name == 'hist_before_after':
+                    func(self.processed_image, self.original_image)
+                else:
+                    func(self.processed_image)
     
     def run(self):
         '''
@@ -117,13 +125,14 @@ class PipelineExecutor:
         '''
         self._load_config()
         self._load_image()
+            
+        operations = self.config['operations']
         
-        with open(self.config_path) as json_file:
-            data = json.load(json_file)
-            
-            operations = data['operations']
-            
-            for i in operations:
-                self._apply_operation(i)
+        for i in operations:
+            self._apply_operation(i)
+        
+        self._save_output()
+        self._visualize()
+                
         
         
