@@ -100,7 +100,7 @@ def enhance_image (img, config):
 def main():
     
     #Load image
-    img = load_image("/Users/matiyasdawit/Desktop/Computer_Vision_Project/cv-bootcamp/src/ex_photo.jpg")
+    img = load_image("/Users/matiyasdawit/Desktop/Computer_Vision_Project/cv-bootcamp/src/image_enhancer/ex_photo.jpg")
     
     config = {
         "brightness": 0,
@@ -109,7 +109,7 @@ def main():
         "plot_histogram": False,
         "normalize": True,
         "equalize": True,
-        "clahe": False,
+        "clahe": True,
         "gamma": False,
         "gamma_value": 5,
         "white_balance": False,
