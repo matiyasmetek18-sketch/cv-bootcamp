@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "image-enhancer"
+version = "0.1.0"
+dependencies = [
+  "numpy",
+  "opencv-python",
+  "matplotlib"
+]
+
+requires-python = ">=3.8"
+authors = [
+  {name = "Matiyas Dawit", email = "matiyasmetek18@gmail.com"}
+]
+
+description = "A modular image enhancement pipeline with a command-line interface."
+
+[project.urls]
+Repository = "https://github.com/matiyasmetek18-sketch/cv-bootcamp"
+
+[project.scripts]
+enhance-image = "image_enhancer.cli:main"
