@@ -289,7 +289,7 @@ def compute_histogram(img):
   # The bin is incremented by 1 
   for i in gray_img:
     for j in i:
-      hist_array[j] += 1 
+      hist_array[int(j)] += 1 
     
   return hist_array
     

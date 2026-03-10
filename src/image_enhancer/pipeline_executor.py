@@ -120,7 +120,7 @@ class PipelineExecutor:
                 if viz_name == 'plot_before_after' or viz_name == 'hist_before_after':
                     func(self.original_image, self.processed_image)
                 else:
-                    func(self.processed_image)
+                    func(self.original_image)
     
     def run(self):
         '''
