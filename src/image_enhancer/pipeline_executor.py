@@ -70,6 +70,7 @@ class PipelineExecutor:
         if self.original_image is None:
             raise ValueError('The image path in pipleline_executor is invalid')
         
+        
         self.processed_image = self.original_image.copy()
         
     
@@ -86,11 +87,15 @@ class PipelineExecutor:
         func = OPERATION_REGISTRY[op_name]
         copy_dict = operation_dict.copy()
         
-        if (len(copy_dict) > 1):
-            copy_dict.pop('name')
-            self.processed_image = func(self.original_image, **copy_dict)
-        else:
-            self.processed_image = func(self.original_image)
+        print(f'\nBefore function {self.processed_image.shape}')
+        print(f'operation name: {op_name}')
+        print(f'Args: {copy_dict}')
+        
+        copy_dict.pop('name')
+        self.processed_image = func(self.processed_image, **copy_dict)
+        
+        print(f'\nAfter function {self.processed_image.shape}')
+        print(f'Args: {copy_dict}')
     
     def _save_output(self):
         '''

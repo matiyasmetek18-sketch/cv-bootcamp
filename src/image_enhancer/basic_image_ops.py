@@ -368,6 +368,7 @@ def plot_color_histogram(hist_r, hist_g, hist_b):
   plt.ylabel('Count of red, green, and blue pixel values/ Histogram counts')
   plt.title('Color Histogram')
   
+  plt.tight_layout()
   plt.show()
 
 def adjust_brightness(img, value):
@@ -602,12 +603,15 @@ def adjust_gamma(img, gamma):
     '''
     if gamma <= 0:
         raise ValueError('Invalid gamma value')
+      
     new_img = img.copy()
     
-    invGamma = 1.0 / gamma
-    gamma_corrected = np.array(255 * (invGamma / 255.0) ** gamma, dtype = 'uint8')
+    # invGamma = 1.0 / gamma
+    # gamma_corrected = np.array(255 * (invGamma / 255.0) ** gamma, dtype = 'uint8')
     
-    return gamma_corrected
+    new_img = np.power(new_img, gamma)
+    
+    return new_img
 
 def gray_world(img):
     '''
@@ -682,7 +686,7 @@ def hist_before_after(original, enhanced, title_before = 'Original', title_after
       hist_r, hist_g, hist_b = compute_color_histogram(original)
       plot_color_histogram(hist_r, hist_g, hist_b)
   
-  plt.title(title_before)
+  plt.suptitle(title_before)
   
   plt.subplot(1, 2, 2)
   
@@ -693,7 +697,7 @@ def hist_before_after(original, enhanced, title_before = 'Original', title_after
       hist_r, hist_g, hist_b = compute_color_histogram(enhanced)
       plot_color_histogram(hist_r, hist_g, hist_b)
   
-  plt.title(title_after)
+  plt.suptitle(title_after)
   
   plt.suptitle('Histogram comparision')
   plt.tight_layout()
