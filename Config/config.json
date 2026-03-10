@@ -1,11 +1,11 @@
 {
-  "input" : "/Users/matiyasdawit/Desktop/Computer_Vision_Project/cv-bootcamp/src/ex_photo.jpg",
-  "output" : "enhanced_new_photo.jpg",
+  "input" : "/Users/matiyasdawit/Desktop/Computer_Vision_Project/cv-bootcamp/src/image_enhancer/ex_photo.jpg",
+  "output" : "enhanced_new_photo_addition.jpg",
   "operations": [
     {
       "name": "resize_image",
-      "image_width": 143,
-      "image_height": 167
+      "img_width": 143,
+      "img_height": 143
     },
     {
       "name": "to_grayscale"

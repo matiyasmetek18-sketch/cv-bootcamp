@@ -55,6 +55,8 @@ def enhance_image (img, config):
         
         img_copy = histogram_equalization_clahe_grayscale(img_copy)
         
+        clahe_eqlz_before_after(img_copy)
+        
         print('\nAfter Clahe')
         image_info(img_copy)
         

@@ -1,7 +1,7 @@
 import cv2 as cv
 import json 
-from operation_registry import OPERATION_REGISTRY
-from visualization_registry import VISUALIZATION_REGISTRY
+from image_enhancer.operation_registry import OPERATION_REGISTRY
+from image_enhancer.visualization_registry import VISUALIZATION_REGISTRY
 
 class PipelineExecutor:
     def __init__(self, config_path):
@@ -85,8 +85,12 @@ class PipelineExecutor:
         op_name = operation_dict['name']
         func = OPERATION_REGISTRY[op_name]
         copy_dict = operation_dict.copy()
-        copy_dict.pop('name')
-        self.processed_image = func(self.processed_image, **copy_dict)
+        
+        if (len(copy_dict) > 1):
+            copy_dict.pop('name')
+            self.processed_image = func(self.original_image, **copy_dict)
+        else:
+            self.processed_image = func(self.original_image)
     
     def _save_output(self):
         '''
@@ -110,7 +114,7 @@ class PipelineExecutor:
             if value:
                 func = VISUALIZATION_REGISTRY[viz_name]
                 if viz_name == 'plot_before_after' or viz_name == 'hist_before_after':
-                    func(self.processed_image, self.original_image)
+                    func(self.original_image, self.processed_image)
                 else:
                     func(self.processed_image)
     

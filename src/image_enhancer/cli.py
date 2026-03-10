@@ -1,5 +1,5 @@
 import argparse 
-from pipeline_executor import PipelineExecutor
+from image_enhancer.pipeline_executor import PipelineExecutor
 
 def main():
     parser = argparse.ArgumentParser(
