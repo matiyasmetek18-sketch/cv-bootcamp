@@ -95,7 +95,6 @@ class PipelineExecutor:
         self.processed_image = func(self.processed_image, **copy_dict)
         
         print(f'\nAfter function {self.processed_image.shape}')
-        print(f'Args: {copy_dict}')
     
     def _save_output(self):
         '''

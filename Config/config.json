@@ -16,13 +16,16 @@
     },
     {
       "name": "normalize"
+    },
+    {
+      "name": "contrast_stretch"
     }
   ],
   "visualize": {
     "compute_histogram": false,
     "compute_color_histogram": false,
     "plot_before_after": true,
-    "clahe_eqlz_before_after": false,
+    "clahe_eqlz_before_after": true,
     "hist_before_after": false
   }
   

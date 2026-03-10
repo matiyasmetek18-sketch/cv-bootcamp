@@ -606,8 +606,7 @@ def adjust_gamma(img, gamma):
       
     new_img = img.copy()
     
-    # invGamma = 1.0 / gamma
-    # gamma_corrected = np.array(255 * (invGamma / 255.0) ** gamma, dtype = 'uint8')
+    # gamma_corrected = np.array(gamma, dtype = 'uint8')
     
     new_img = np.power(new_img, gamma)
     
@@ -709,6 +708,8 @@ def clahe_eqlz_before_after(img):
   :param img: image to be shown and processed
   '''
   plt.figure(figsize = (10,6))
+  
+  img = img.astype('uint8')
   
   plt.subplot(1, 3, 1)
   if is_gray(img):
