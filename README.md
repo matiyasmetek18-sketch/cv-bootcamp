@@ -3,6 +3,9 @@
 
 ---
 
+## Summary 
+- A modular, config-driven image enhancment pipeline with a CLI, dynmaic operation registry, visulaization suite and full test coverage
+
 ##  Milestone 1 — Project Setup & Functionality Scaffolding   
 *Completed over several real days*
 
