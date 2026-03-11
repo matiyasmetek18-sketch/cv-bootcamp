@@ -6,6 +6,9 @@
 ## Summary 
 - A modular, config-driven image enhancment pipeline with a CLI, dynmaic operation registry, visulaization suite and full test coverage
 
+## High level Overview 
+- This project is a professional-grade image enhacement pipeline built as part of a self-directed computer vision bootcamp. It includes a dynmaic operation registry, a modular pipleine exectuor, a visulaization suite, and a fully pakcaged CLI tool. Every component was designed with real engineering practices: clean architecture, reproducible configs, test coverage and `src/` layout. 
+
 ##  Milestone 1 — Project Setup & Functionality Scaffolding   
 *Completed over several real days*
 
