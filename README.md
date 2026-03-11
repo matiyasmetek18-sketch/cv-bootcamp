@@ -76,6 +76,9 @@ operations:
     gamma: 0.9
 ```
 
+## Example before/after comparision
+- After an image was transformed by the gray_world algorithm so as to produce a more detailed gray image
+ 
 ##  Milestone 1 — Project Setup & Functionality Scaffolding   
 *Completed over several real days*
 
