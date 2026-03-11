@@ -60,6 +60,22 @@ cd cv-bootcamp
 pip install -e .
 ```
 
+## Example CLI Usage
+```python
+enhance-image --config configs/basic.yaml --input input.jpg --output output.jpg
+```
+
+## Example Config snipeet
+```Yaml
+operations:
+  - resize:
+    img_width: 170
+    img_heigth: 170
+  - to_grayscale
+  - adjust_gamma:
+    gamma: 0.9
+```
+
 ##  Milestone 1 — Project Setup & Functionality Scaffolding   
 *Completed over several real days*
 
