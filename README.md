@@ -9,6 +9,57 @@
 ## High level Overview 
 - This project is a professional-grade image enhacement pipeline built as part of a self-directed computer vision bootcamp. It includes a dynmaic operation registry, a modular pipleine exectuor, a visulaization suite, and a fully pakcaged CLI tool. Every component was designed with real engineering practices: clean architecture, reproducible configs, test coverage and `src/` layout. 
 
+## Features 
+### Core Features
+- Modular enhacmement pipeline
+- Dynamic operation registry
+- Visulaization registry
+- Config-driven architecture
+- CLI tool (enhance-image)
+- Full test suite with pytest
+
+### Enhacement Operations
+- Brightness
+- Contrast
+- Gamma corrrection
+- Normlization
+- Contrast stretching
+- White balance (LAB)
+- Histogram equalization
+- CLAHE
+
+### Geometric Operations
+- Resize
+- Crop
+- Rotate
+- Flip
+
+### Visualization Tools
+- Before / After visualization tools
+- Histogram comparison
+- CLAHE vs Equalization comparison
+
+## Project Structure 
+```python
+src/
+  image_enhancer/
+    __init__.py
+    basic_image_ops.py
+    cli.py
+    enhancment_pipeline.py
+    ex_photo.jpg
+    operation_registry.py
+    pipleine_executor.py
+    visualization_registry.py
+```
+
+## Installation instructions
+```python
+git clone
+cd cv-bootcamp
+pip install -e .
+```
+
 ##  Milestone 1 — Project Setup & Functionality Scaffolding   
 *Completed over several real days*
 
