@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: image_enhancer
+Version: 0.1.0
+Summary: A modular image enhancement pipeline with a command-line interface.
+Author-email: Matiyas Dawit <matiyasmetek18@gmail.com>
+Project-URL: Repository, https://github.com/matiyasmetek18-sketch/cv-bootcamp
+Requires-Python: >=3.8
+Requires-Dist: numpy
+Requires-Dist: opencv-python
+Requires-Dist: matplotlib
