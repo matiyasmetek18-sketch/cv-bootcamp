@@ -27,5 +27,5 @@ enhance-image = "image_enhancer.cli:main"
 [tool.setuptools]
 package-dir = {"" = "src"}
 
-[tool.setuptools.packages]
-names = ["image_enhancer"]
+[tool.setuptools.packages.find]
+where = ["src"]

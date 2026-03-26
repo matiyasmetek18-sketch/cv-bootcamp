@@ -1,2 +1,0 @@
-[console_scripts]
-enhance-image = image_enhancer.cli:main
