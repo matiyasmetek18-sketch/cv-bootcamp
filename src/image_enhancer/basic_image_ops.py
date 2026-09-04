@@ -392,12 +392,15 @@ def adjust_brightness(img, value):
     for i in range(row):
       
       for j in range(column):
-        adj_img[i, j] += value
+        val = int(adj_img[i, j])
+        val += value  
         
-        if adj_img[i, j] < 0:
+        if val < 0:
           adj_img[i, j] = 0
-        elif adj_img[i, j] > 255:
+        elif val > 255:
           adj_img[i, j] = 255
+        else:
+          adj_img[i, j] = val
         
         
   else: 
@@ -409,34 +412,43 @@ def adjust_brightness(img, value):
     for i in range(row_b):
       
       for j in range(column_b):
-        blue[i, j] += value
+        val = int(blue[i, j])
+        val += value
         
-        if blue[i, j] < 0:
+        if val < 0:
           blue[i, j] = 0
-        elif blue[i, j] > 255:
+        elif val > 255:
           blue[i, j] = 255
+        else:
+          blue[i, j] = val
     
     row_g, column_g = green.shape
     for i in range(row_g):
       
       for j in range(column_g):
-        green[i, j] += value
+        val = int(green[i, j])
+        val += value
         
-        if green[i, j] < 0:
+        if val < 0:
           green[i, j] = 0
-        elif green[i, j] > 255:
+        elif val > 255:
           green[i, j] = 255
+        else:
+          green[i, j] = val
         
     row_r, column_r = red.shape
     for i in range(row_r):
       
       for j in range(column_r):
-        red[i, j] += value
+        val = int(red[i, j])
+        val += value
         
-        if red[i, j] < 0:
+        if val < 0:
           red[i, j] = 0
-        elif red[i, j] > 255:
+        elif val > 255:
           red[i, j] = 255
+        else:
+          red[i, j] = val
   
   
   return adj_img
