@@ -35,3 +35,9 @@ def test_adjust_brightness_lower_clip():
     new_img = adjust_brightness(img, -20)
 
     assert np.all(new_img == 0)
+
+def test_adjust_brightness_color():
+    img = np.full((2, 2, 3), 100, dtype=np.uint8)
+    new_img = adjust_brightness(img, 20)
+
+    assert np.all(new_img == 120)
