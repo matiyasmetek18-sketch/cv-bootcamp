@@ -618,9 +618,14 @@ def adjust_gamma(img, gamma):
       
     new_img = img.copy()
     
+    new_img = new_img.astype(np.float32) / 255.0
+    
     # gamma_corrected = np.array(gamma, dtype = 'uint8')
     
     new_img = np.power(new_img, gamma)
+    
+    new_img *= 255.0
+    new_img = new_img.astype(np.uint8)
     
     return new_img
 
