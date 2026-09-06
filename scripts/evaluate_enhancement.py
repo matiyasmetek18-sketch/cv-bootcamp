@@ -27,14 +27,12 @@ degraded_ssim = structural_similarity(
     data_range=255
 )
 
-print(f"Degraded SSIM: {degraded_ssim:.4f}")
-
 enhanced = cv.imread("enhanced_degraded.jpg")
 
 if enhanced is None:
     raise ValueError("Could not load enhanced image")
 
-enhanced_gray = enhanced  # already grayscale
+enhanced_gray = cv.cvtColor(enhanced, cv.COLOR_BGR2GRAY)
 
 print("Clean shape:", clean_gray.shape)
 print("Enhanced shape:", enhanced_gray.shape)
