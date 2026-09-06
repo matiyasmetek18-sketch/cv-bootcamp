@@ -3,11 +3,6 @@
   "output" : "enhanced_new_photo_addition.jpg",
   "operations": [
     {
-      "name": "resize_image",
-      "img_width": 120,
-      "img_height": 120
-    },
-    {
       "name": "to_grayscale"
     },
     {
