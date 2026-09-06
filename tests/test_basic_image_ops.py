@@ -1,5 +1,5 @@
 import numpy as np
-from image_enhancer.basic_image_ops import resize_image, adjust_gamma, adjust_brightness
+from image_enhancer.basic_image_ops import resize_image, adjust_gamma, adjust_brightness, contrast_stretch
 
 def test_resize_image():
     img = np.random.randint(0, 256, (100, 100, 3), dtype=np.uint8)
@@ -41,3 +41,20 @@ def test_adjust_brightness_color():
     new_img = adjust_brightness(img, 20)
 
     assert np.all(new_img == 120)
+    
+def test_contrast_stretch_lower_bound():
+    img = np.array([[20]], dtype=np.uint8)
+    result = contrast_stretch(img, 50, 200)
+    assert result[0, 0] == 0
+
+
+def test_contrast_stretch_upper_bound():
+    img = np.array([[250]], dtype=np.uint8)
+    result = contrast_stretch(img, 50, 200)
+    assert result[0, 0] == 255
+
+
+def test_contrast_stretch_middle():
+    img = np.array([[100]], dtype=np.uint8)
+    result = contrast_stretch(img, 50, 200)
+    assert result[0, 0] == 85
