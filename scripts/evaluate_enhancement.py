@@ -36,6 +36,9 @@ if enhanced is None:
 
 enhanced_gray = enhanced  # already grayscale
 
+print("Clean shape:", clean_gray.shape)
+print("Enhanced shape:", enhanced_gray.shape)
+
 enhanced_ssim = structural_similarity(
     clean_gray,
     enhanced_gray,
