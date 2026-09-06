@@ -28,3 +28,19 @@ degraded_ssim = structural_similarity(
 )
 
 print(f"Degraded SSIM: {degraded_ssim:.4f}")
+
+enhanced = cv.imread("enhanced_degraded.jpg")
+
+if enhanced is None:
+    raise ValueError("Could not load enhanced image")
+
+enhanced_gray = enhanced  # already grayscale
+
+enhanced_ssim = structural_similarity(
+    clean_gray,
+    enhanced_gray,
+    data_range=255
+)
+
+print(f"Degraded SSIM: {degraded_ssim:.4f}")
+print(f"Enhanced SSIM: {enhanced_ssim:.4f}")
