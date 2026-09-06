@@ -10,3 +10,13 @@ def create_degraded_image(img):
     degraded = np.clip(degraded, 0, 255)
 
     return degraded.astype(np.uint8)
+
+
+clean = cv.imread("src/image_enhancer/logi.jpg")
+
+if clean is None:
+    raise ValueError("Could not load clean image")
+
+degraded = create_degraded_image(clean)
+
+cv.imwrite("degraded.jpg", degraded)
