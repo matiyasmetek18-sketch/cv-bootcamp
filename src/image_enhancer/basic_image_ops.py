@@ -541,7 +541,7 @@ def normalize_image(img):
 
   
 
-def contrast_stretch(img):
+def contrast_stretch(img, lower, upper):
   '''
   This function will find the min and max pixel values 
   This funciton will linearly stretch intesities to fill 0-255
@@ -549,18 +549,27 @@ def contrast_stretch(img):
   
   :param img: input image (color or grayscale)
   '''
+  
+  if lower >= upper:
+    raise ValueError("lower must be less than upper")
+  
+  if not (0 <= lower <= 255 and 0 <= upper <= 255):
+    raise ValueError("bounds must be between 0 and 255")
+  
+  
   check_if_valid(img)
   
   img_copy = img.copy()
   
-  gray_img = img_copy.copy()
+  result = np.clip(
+    ((img_copy.astype(np.float32) - lower) / (upper - lower)) * 255,
+    0,
+    255
+)
   
-  if not is_gray(img_copy):
-    contrast_color_img = cv.normalize(img_copy, None, 0, 255, cv.NORM_MINMAX)
-    return contrast_color_img
-  else:
-    contrast_gray_img = cv.normalize(gray_img, None, alpha = 0, beta = 255, norm_type = cv.NORM_MINMAX)
-    return contrast_gray_img
+  result = result.astype(np.uint8)
+    
+  return result
 
 def histogram_equalization(img):
     '''
