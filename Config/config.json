@@ -18,7 +18,9 @@
       "name": "normalize"
     },
     {
-      "name": "contrast_stretch"
+      "name": "contrast_stretch",
+      "lower" : 50,
+      "upper" : 200
     }
   ],
   "visualize": {
