@@ -1,5 +1,5 @@
 {
-  "input" : "/Users/matiyasdawit/Desktop/Computer_Vision_Project/cv-bootcamp/src/image_enhancer/logi.jpg",
+  "input": "src/image_enhancer/logi.jpg",
   "output" : "enhanced_new_photo_addition.jpg",
   "operations": [
     {
