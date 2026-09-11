@@ -1,5 +1,6 @@
 import cv2 as cv
 import json 
+import sys
 from image_enhancer.operation_registry import OPERATION_REGISTRY
 from image_enhancer.visualization_registry import VISUALIZATION_REGISTRY
 
@@ -84,6 +85,18 @@ class PipelineExecutor:
         :param operation_dict: is the operation dictionary of the config file 
         '''
         op_name = operation_dict['name']
+        
+        valid_ops = {
+            'resize_image', 
+            'to_grayscale', 
+            'adjust_gamma', 
+            'normalize', 
+            'contrast_stretch'
+        }
+        
+        if op_name not in valid_ops:
+            sys.exit(f"Error: '{op_name}' is not a valid operation. Exiting program.")
+            
         func = OPERATION_REGISTRY[op_name]
         copy_dict = operation_dict.copy()
         
