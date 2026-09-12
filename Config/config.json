@@ -1,6 +1,6 @@
 {
   "input": "degraded.jpg",
-  "output": "enhanced_degraded.jpg",
+  "output": "data/output/enhanced_degraded.jpg",
   "operations": [
     {
       "name": "to_grayscale"

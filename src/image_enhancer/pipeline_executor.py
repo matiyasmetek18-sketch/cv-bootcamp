@@ -1,6 +1,8 @@
 import cv2 as cv
 import json 
 import sys
+import os
+from pathlib import Path
 from image_enhancer.operation_registry import OPERATION_REGISTRY
 from image_enhancer.visualization_registry import VISUALIZATION_REGISTRY
 
@@ -56,6 +58,15 @@ class PipelineExecutor:
                     raise ValueError('Missing \'name\' in the dictionaries')
             
             self.config = data
+            
+        trusted_dirc = Path('data/output')
+        normalized = Path(os.path.normpath(self.config['output']))
+        
+        base = trusted_dirc.resolve()
+        target = normalized.resolve()
+                
+        if not target.is_relative_to(base):
+            raise ValueError('The configuration path is invalid')
     
     def _load_image(self):
         '''
