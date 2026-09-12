@@ -60,7 +60,7 @@ class PipelineExecutor:
             self.config = data
             
         trusted_dirc = Path('data/output')
-        normalized = Path(os.path.normpath(self.config['output']))
+        normalized = Path(self.config['output'])
         
         base = trusted_dirc.resolve()
         target = normalized.resolve()
