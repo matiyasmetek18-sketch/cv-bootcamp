@@ -59,6 +59,15 @@ class PipelineExecutor:
             
             self.config = data
             
+        trusted_dirc = Path('data/input')
+        normalized = Path(self.config['input'])
+        
+        base = trusted_dirc.resolve()
+        target = normalized.resolve()
+                
+        if not target.is_relative_to(base):
+            raise ValueError('The input configuration path is invalid')
+        
         trusted_dirc = Path('data/output')
         normalized = Path(self.config['output'])
         
@@ -66,7 +75,7 @@ class PipelineExecutor:
         target = normalized.resolve()
                 
         if not target.is_relative_to(base):
-            raise ValueError('The configuration path is invalid')
+            raise ValueError('The output configuration path is invalid')
     
     def _load_image(self):
         '''

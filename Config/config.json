@@ -1,5 +1,5 @@
 {
-  "input": "degraded.jpg",
+  "input": "data/input/degraded.jpg",
   "output": "data/output/enhanced_degraded.jpg",
   "operations": [
     {
